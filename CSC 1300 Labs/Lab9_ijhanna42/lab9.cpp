@@ -12,6 +12,7 @@ void getParanormalData(int, int*, string*, string*);
 void getStats(int, int*, int*, double*, int*);
 
 int main(){
+    string lineOfDashes(50, '-');
     int numInvestigators;
     int total;
     double average;
@@ -40,10 +41,12 @@ int main(){
     getParanormalData(numInvestigators, numRecordingsPtr, arrayNameInvestigator, arrayDate);
     getStats(numInvestigators, /*number of recordings each investigator had*/, &total, &average, &highestIndex);
 
-    cout << "\nThe total amount of EVPs recorded by all " << numInvestigators << " investigators at " << nameLocation << " is " << total << " recordings.";
-    cout << "\nThe average amount of EVPs recorded at " << nameLocation << " is " << average << " recordings.";
-    cout << "\nThe investigator who recorded the most (" << /*most recordings*/ << " recordings) is " << highestIndex << " on " << /*date of most recordings*/;
-//remember to delete arrays
+    cout << lineOfDashes;
+    cout << "\nThe total amount of EVPs recorded by all " << numInvestigators << " investigators at " << nameLocation << " is " << total << " recordings.\n";
+    cout << "\nThe average amount of EVPs recorded at " << nameLocation << " is " << average << " recordings.\n";
+    cout << "\nThe investigator who recorded the most (" << /*most recordings*/ << " recordings) is " << highestIndex << " on " << /*date of most recordings*/"\n";
+    cout << lineOfDashes;
+//remember to delete pointer notation
 }
 
 void getParanormalData(int numInvestigators, int* numRecordings, string* arrayNames, string* arrayDates){
