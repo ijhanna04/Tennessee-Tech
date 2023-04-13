@@ -32,7 +32,8 @@ int main(){
 
     //ask user for location they are investigating
     cout << "Hello! What haunted location are you investigating?\n";
-    getline(cin, nameLocation);
+    cin.ignore();
+    cin.getline(nameLocation, 100);
 
     //ask user for the number of investigators at the location
     cout << "\nHow many investigators will be working at this location?\n";
@@ -75,9 +76,16 @@ void getParanormalData(int numInvestigators, int *numRecordings, string *arrayNa
     for (int i = 0; i < numInvestigators; i++){
         cout << "INVESTIGATOR " << i + 1 << ":\n";
         cout << "       NAME - ";
-        cin >> arrayNames[i];
+        cin.ignore();
+        string name;
+        getline(cin, name);
+
         cout << "       DAY (ex: 04-03-2023) - ";
-        cin >> arrayDates[i];
+        arrayNames[i] = name;
+        string date;
+        getline(cin, date);
+        arrayDates[i] = date;
+
         cout << "       NUMBER OF EVPs - ";
         cin >> numRecordings[i];
     }
@@ -86,15 +94,16 @@ void getParanormalData(int numInvestigators, int *numRecordings, string *arrayNa
 //getStats function
 void getStats(int numInvestigators, int *numEVPs, int *totalPtr, double *averagePtr, int *indexPtr){
     int max = 0;
+    double totalEVPs;
     *totalPtr = 0;
     *averagePtr = 0.0;
 
     for (int i = 0; i < numInvestigators; i++){
         //find total number of EVPs
-        *totalPtr += numEVPs[i];
-
+        totalEVPs += numEVPs[i];
+        *totalPtr = totalEVPs;
         //find average number of EVPs
-        *averagePtr = *totalPtr / numInvestigators;
+        *averagePtr = totalEVPs / numInvestigators;
 
         //find investigator with highest number of recordings
         if (numEVPs[i] > max){
