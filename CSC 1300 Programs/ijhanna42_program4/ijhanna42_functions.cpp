@@ -10,7 +10,7 @@ int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
     cin >> monsterData;
 
     //open user selected file
-    infile.open(monsterData);
+    infile.open(monsterData, ios::in);
 
     //check if file could open before reading from it
     if(infile.is_open()){
@@ -31,6 +31,33 @@ int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
                 }
 
                 //read each monster from the file and place the data in the correct element in the Monster array
+                string weight;
+                string height;
+                string dangerLevel;
+                string careHours;
+                string costHour;
+                string foodCost;
+                string materialCost;
+
+
+                getline(infile, monster[i].name, '#');
+                getline(infile, monster[i].description, '#');
+                getline(infile, weight, '#');
+                getline(infile, height, '#');
+                getline(infile, monster[i].location, '#');
+                getline(infile, dangerLevel, '#');
+                getline(infile, careHours, '#');
+                getline(infile, costHour, '#');
+                getline(infile, foodCost, '#');
+                getline(infile, materialCost, '#');
+                
+                monster[i].weight = stod(weight);
+                monster[i].height = stod(height);
+                monster[i].dangerLevel = stoi(dangerLevel);
+                monster[i].cData.numCareHours = stoi(careHours);
+                monster[i].cData.costPerHour = stod(costHour);
+                monster[i].cData.foodCost = stod(foodCost);
+                monster[i].cData.materialCost = stod(materialCost);
 
                 //print the name of the monster added
                 cout << monster[i].name << " has been added.";
@@ -39,7 +66,7 @@ int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
                 numCurrentMonsters++;
             
             }
-            cout << "All creatures from " << monsterData << "have been added to the program.\n";
+            cout << "All creatures from " << monsterData << " have been added to the program.\n";
 
             //return the updated number of monsters loaded into the array
             
@@ -61,7 +88,12 @@ if (numCurrentMonsters >= maxCapacity){
     return 0;
 
 } else {
-    int i = numCurrentMonsters + 1;
+    int i;
+    if (numCurrentMonsters == 0){
+        i = numCurrentMonsters;
+    } else {
+        i = numCurrentMonsters + 1;
+    }
     //check to make sure the number of monsters is not already 75
     if (numCurrentMonsters >= maxCapacity){
 
@@ -184,7 +216,7 @@ void printMonsters(int numCurrentMonsters, Monsters monster[]){
 
     //if there are no monsters in the zoo, inform user
     if (numCurrentMonsters < 1){
-        cout << "THERE ARE NO MONSTERS AT YOUR ZOO!";
+        cout << "THERE ARE NO MONSTERS AT YOUR ZOO!\n";
 
     } else {
         //print out monster info
@@ -214,7 +246,7 @@ void printCostInfo(int numCurrentMonsters, Monsters monster[]){
 
     //if there are no monsters in the zoo, inform user
     if (numCurrentMonsters == 0){
-        cout << "There are no monsters in the zoo so the total cost is $0.00";
+        cout << "There are no monsters in the zoo so the total cost is $0.00\n";
 
     } else {
 
@@ -242,8 +274,8 @@ void saveMonstersToFile(int numCurrentMonsters, Monsters monster[]){
     ofstream outfile;
 
     //if there are no monsters in the zoo, inform user that there is nothing to be saved
-    if (numCurrentMonsters == 0){
-        cout << "There are no monsters in the zoo so none can be saved to a file.";
+    if (numCurrentMonsters < 1){
+        cout << "There are no monsters in the zoo so none can be saved to a file.\n";
     } else {
 
         //ask user what the name of the file is that they should save their monsters to

@@ -52,7 +52,7 @@ int main(){
                 break;
             case 5:
                 //ask user if they wish to save monster data to a file
-                cout << "Would you like to save your monster list to a file? (y or n)";
+                cout << "Would you like to save your monster list to a file? (y or n) ";
                 cin >> saveChoice;
 
                 //save options choices
