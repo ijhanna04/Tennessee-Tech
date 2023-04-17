@@ -1,5 +1,5 @@
 /*
-    Title:      lab8.cpp
+    Title:      ijhanna42_lab9.cpp
     Author:     Ian Hanna
     Date        April 2023
     Purpose:    Pointers, Array & Pointer Notation, Dynamic Memory Allocation
