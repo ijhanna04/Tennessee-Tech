@@ -43,7 +43,7 @@ int main(){
 
     cout << "\nPlease enter in information about each chef.\n\n";
 
-    for (int i; i < numChefs; i++){
+    for (int i = 0; i < numChefs; i++){
 
         //allow user to enter in information about each chef
         cout << "****CHEF " << i + 1 << "****\n";
@@ -58,23 +58,24 @@ int main(){
         catArray = new PastryCategory[chefArray[i].numCategories];
 
         //enter category name and number of awards for each category
-        for (int j; j < chefArray[i].numCategories; j++){
+        for (int j = 0; j < chefArray[i].numCategories; j++){
             cout << "     FOR CATEGORY " << j + 1 << ":\n";
             cout << "             Name of category - ";
             cin >> catArray[j].name;
             cout << "             Number of awards in " << catArray[j].name << " - ";
             cin >> catArray[j].numAwards;
+            awardsArray[i].numAwards +=catArray[j].numAwards;
             
             //Calculate and print out the most awards earned by a chef
             if (catArray[j].numAwards > mostAwards){
                 mostAwards = catArray[j].numAwards;
-                winChef = catArray[j].name;
+                winChef = chefArray[i].name;
             }
         }
     }
 
 
-    for (int i; i < numChefs; i++){
+    for (int i = 0; i < numChefs; i++){
         for (int j; j < chefArray[i].numCategories; j++){
             
         }
