@@ -39,8 +39,6 @@ int main(){
     PastryCategory ** awardsArray;
     awardsArray = new PastryCategory*[numChefs];
 
-    PastryCategory * catArray;
-
     cout << "\nPlease enter in information about each chef.\n\n";
 
     for (int i = 0; i < numChefs; i++){
@@ -55,20 +53,20 @@ int main(){
         cin >> chefArray[i].numCategories;
 
         //dynamically allocate array of PastryCategory based on number of categories entered
-        catArray = new PastryCategory[chefArray[i].numCategories];
+        awardsArray[i] = new PastryCategory[chefArray[i].numCategories];
 
         //enter category name and number of awards for each category
         for (int j = 0; j < chefArray[i].numCategories; j++){
             cout << "     FOR CATEGORY " << j + 1 << ":\n";
             cout << "             Name of category - ";
-            cin >> catArray[j].name;
-            cout << "             Number of awards in " << catArray[j].name << " - ";
-            cin >> catArray[j].numAwards;
-            awardsArray[i].numAwards +=catArray[j].numAwards;
+            cin >> awardsArray[i].name;
+            cout << "             Number of awards in " << awardsArray[i].name << " - ";
+            int addAwards;
+            cin >> awardsArray[i].numAwards += addAwards;
             
             //Calculate and print out the most awards earned by a chef
-            if (catArray[j].numAwards > mostAwards){
-                mostAwards = catArray[j].numAwards;
+            if (awardsArray[i].numAwards > mostAwards){
+                mostAwards = awardsArray[i].numAwards;
                 winChef = chefArray[i].name;
             }
         }
@@ -85,7 +83,7 @@ int main(){
 
     
 
-    delete [] chefArray;
+
     delete [] awardsArray;
-    delete [] catArray;
+    delete [] chefArray;
 }
