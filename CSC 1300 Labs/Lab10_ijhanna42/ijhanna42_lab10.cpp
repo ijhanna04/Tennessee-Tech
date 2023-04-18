@@ -59,31 +59,30 @@ int main(){
         for (int j = 0; j < chefArray[i].numCategories; j++){
             cout << "     FOR CATEGORY " << j + 1 << ":\n";
             cout << "             Name of category - ";
-            cin >> awardsArray[i].name;
-            cout << "             Number of awards in " << awardsArray[i].name << " - ";
+            cin >> awardsArray[i][j].name;
+            cout << "             Number of awards in " << awardsArray[i][j].name << " - ";
             int addAwards;
-            cin >> awardsArray[i].numAwards += addAwards;
+            cin >> addAwards;
+            awardsArray[i][j].numAwards += addAwards;
             
             //Calculate and print out the most awards earned by a chef
-            if (awardsArray[i].numAwards > mostAwards){
-                mostAwards = awardsArray[i].numAwards;
+            if (awardsArray[i][j].numAwards > mostAwards){
+                mostAwards = awardsArray[i][j].numAwards;
                 winChef = chefArray[i].name;
             }
         }
-    }
 
-
-    for (int i = 0; i < numChefs; i++){
-        for (int j; j < chefArray[i].numCategories; j++){
-            
-        }
-    }
 
     cout << "The pastry chef who has won the most awards (" << mostAwards << " awards) is " << winChef << ", with awards in the following categories:\n";
-
     
-
+    for(int k = 0; k < numChefs ; k++){
+        delete [] awardsArray[i];
+    }
 
     delete [] awardsArray;
     delete [] chefArray;
+    }
+
+
+    
 }
