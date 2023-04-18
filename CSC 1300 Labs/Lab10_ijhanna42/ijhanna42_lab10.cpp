@@ -24,6 +24,7 @@ struct Chef{
 int main(){
     //variable declarations
     int numChefs = 0;
+    int winCategories = 0;
     string winChef;
     int mostAwards = 0;
 
@@ -40,8 +41,9 @@ int main(){
     awardsArray = new PastryCategory*[numChefs];
 
     cout << "\nPlease enter in information about each chef.\n\n";
+    int i;
 
-    for (int i = 0; i < numChefs; i++){
+    for (i = 0; i < numChefs; i++){
 
         //allow user to enter in information about each chef
         cout << "****CHEF " << i + 1 << "****\n";
@@ -57,32 +59,34 @@ int main(){
 
         //enter category name and number of awards for each category
         for (int j = 0; j < chefArray[i].numCategories; j++){
-            cout << "     FOR CATEGORY " << j + 1 << ":\n";
-            cout << "             Name of category - ";
+            cout << "      FOR CATEGORY " << j + 1 << ":\n";
+            cout << "            Name of category - ";
             cin >> awardsArray[i][j].name;
-            cout << "             Number of awards in " << awardsArray[i][j].name << " - ";
-            int addAwards;
+            cout << "            Number of awards in " << awardsArray[i][j].name << " - ";
+            int addAwards = 0;
             cin >> addAwards;
             awardsArray[i][j].numAwards += addAwards;
             
-            //Calculate and print out the most awards earned by a chef
+            //Calculate the most awards earned by a chef
             if (awardsArray[i][j].numAwards > mostAwards){
                 mostAwards = awardsArray[i][j].numAwards;
                 winChef = chefArray[i].name;
+                winCategories = chefArray[i].numCategories;
             }
         }
+    }
 
-
-    cout << "The pastry chef who has won the most awards (" << mostAwards << " awards) is " << winChef << ", with awards in the following categories:\n";
+    //print out the winner
+    cout << "\n\nThe pastry chef who has won the most awards (" << mostAwards << " awards) is " << winChef << ", with awards in the following categories:\n";
+    for(int l = 0; l < winCategories; l++){
+        
+    }
     
     for(int k = 0; k < numChefs ; k++){
         delete [] awardsArray[i];
     }
-
     delete [] awardsArray;
     delete [] chefArray;
-    }
-
 
     
 }
