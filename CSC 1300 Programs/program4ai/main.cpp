@@ -4,7 +4,7 @@ int main() {
     Monster monsters[75];
     int numMonsters = 0;
     cout << "Welcome to the Monster Zoo program!" << endl;
-    loadMonstersFromFile(monsters, numMonsters);
+    numMonsters = loadMonstersFromFile(monsters, numMonsters);
     int choice = 0;
     do {
         cout << "What would you like to do?" << endl;
@@ -18,10 +18,10 @@ int main() {
 
         switch (choice) {
             case 1:
-                registerMonster(monsters, numMonsters);
+                numMonsters = registerMonster(monsters, numMonsters);
                 break;
             case 2:
-                removeMonster(monsters, numMonsters);
+                numMonsters = removeMonster(monsters, numMonsters);
                 break;
             case 3:
                 printMonsters(monsters, numMonsters);
