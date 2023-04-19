@@ -2,23 +2,27 @@
 
 int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
     string monsterData;
-    ifstream infile;
-
+    
     //ask user what the name of the file is that they would like to load the monsters from
     cout << "What is the name of the file with your monster data? (ex: filename.txt)" << endl;
     cout << "FILENAME: ";
     cin >> monsterData;
 
     //open user selected file
-    infile.open(monsterData, ios::in);
+    ifstream infile(monsterData);
+
+    if (!infile.is_open()) {
+        cout << "Could not open file." << endl;
+        return numCurrentMonsters;
+    }
 
     //check if file could open before reading from it
     if(infile.is_open()){
         if (numCurrentMonsters >= maxCapacity){
             cout << "No more monsters can be registered at this time. Zoo is at full capacity." << endl;
-        }else {           
-            for(int i = 0; i < maxCapacity; i++){
-                i = numCurrentMonsters + 1;
+
+        } else {           
+            for(int i = 0; i < numCurrentMonsters; i++){
 
                 //check to make sure the number of monsters is not already 75
                 if (numCurrentMonsters >= maxCapacity){
@@ -31,9 +35,11 @@ int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
                 //read each monster from the file and place the data in the correct element in the Monster array
                 string temp;
 
-                getline(infile, monster[i].name, '#');
+                getline(infile, temp, '#');
+                monster[i].name = temp;
 
-                getline(infile, monster[i].description, '#');
+                getline(infile, temp, '#');
+                monster[i].description = temp;
 
                 getline(infile, temp, '#');
                 monster[i].weight = stod(temp);
@@ -41,7 +47,8 @@ int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
                 getline(infile, temp, '#');
                 monster[i].height = stod(temp);
 
-                getline(infile, monster[i].location, '#');
+                getline(infile, temp, '#');
+                monster[i].location = temp;
 
                 getline(infile, temp, '#');
                 monster[i].dangerLevel = stoi(temp);
@@ -66,12 +73,10 @@ int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
             
             }
 
-        cout << "All creatures from " << monsterData << " have been added to the program." << endl;
-
+            infile.close();
+            cout << "All creatures from " << monsterData << " have been added to the program." << endl;
         }
 
-    } else {
-        cout << "Could not open file." << endl;
     }
 
     //return the updated number of monsters loaded into the array
@@ -244,14 +249,14 @@ void printMonsters(int numCurrentMonsters, Monsters monster[]){
         //print out monster info
         for (int i = 0; i < numCurrentMonsters; i++){
             cout << lineOfDashes << endl;
-            cout << "**MONSTER " << i + 1 << "**\n";
-            cout << "Name: " << monster[i].name;
-            cout << "Description: " << monster[i].description;
-            cout << "Weight: " << fixed << setprecision(2) << monster[i].weight;
-            cout << "Height: " << fixed << setprecision(2) << monster[i].height;
-            cout << "Last known location: " << monster[i].location;
-            cout << "Danger level: " << monster[i].dangerLevel;
-            cout << "Weekly Care Information:\n";
+            cout << "**MONSTER " << i + 1 << "**" << endl;
+            cout << "Name: " << monster[i].name << endl;
+            cout << "Description: " << monster[i].description << endl;
+            cout << "Weight: " << fixed << setprecision(2) << monster[i].weight << endl;
+            cout << "Height: " << fixed << setprecision(2) << monster[i].height << endl;
+            cout << "Last known location: " << monster[i].location << endl;
+            cout << "Danger level: " << monster[i].dangerLevel << endl;
+            cout << "Weekly Care Information:" << endl;
             cout << "        -Hours of care required:      " << fixed << setprecision(2) << monster[i].cData.numCareHours << endl;
             cout << "        -Cost of care:                $ " << fixed << setprecision(2) << monster[i].cData.costPerHour << endl;
             cout << "        -Food cost:                   $ " << fixed << setprecision(2) << monster[i].cData.foodCost << endl;
