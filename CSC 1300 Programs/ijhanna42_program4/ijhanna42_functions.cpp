@@ -2,6 +2,7 @@
 
 int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
     string monsterData;
+    monster[maxCapacity];
     
     //ask user what the name of the file is that they would like to load the monsters from
     cout << "What is the name of the file with your monster data? (ex: filename.txt)" << endl;
@@ -11,29 +12,14 @@ int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
     //open user selected file
     ifstream infile(monsterData);
 
-    if (!infile.is_open()) {
-        cout << "Could not open file." << endl;
-        return numCurrentMonsters;
-    }
-
     //check if file could open before reading from it
-    string line;
     if(infile.is_open()){
         while (!infile.eof()){
             if (numCurrentMonsters >= maxCapacity){
                 cout << "No more monsters can be registered at this time. Zoo is at full capacity." << endl;
                 break;
 
-            } else {           
-                
-                    //check to make sure the number of monsters is not already 75
-                    if (numCurrentMonsters >= maxCapacity){
-
-                        //tell user that zoo is at full capacity
-                        cout << "No more monsters can be registered at this time. Zoo is at full capacity.";
-                        break;
-                    }
-
+            }       
 
                     //read each monster from the file and place the data in the correct element in the Monster array
                     string temp;
@@ -74,14 +60,14 @@ int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
                     //increment the number of monsters
                     numCurrentMonsters++;
                 
-                }
-
-                infile.close();
                 cout << "All creatures from " << monsterData << " have been added to the program." << endl;
                 break;
             }
-        
+        infile.close();
 
+    } else {
+        cout << "Could not open file." << endl;
+        return numCurrentMonsters;
     }
 
     //return the updated number of monsters loaded into the array
