@@ -33,43 +33,43 @@ int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
                         cout << "No more monsters can be registered at this time. Zoo is at full capacity.";
                         break;
                     }
-                    for(int i = 0; i < numCurrentMonsters; i++){
+
 
                     //read each monster from the file and place the data in the correct element in the Monster array
                     string temp;
 
                     getline(infile, temp, '#');
-                    monster[i].name = temp;
+                    monster[numCurrentMonsters].name = temp;
 
                     getline(infile, temp, '#');
-                    monster[i].description = temp;
+                    monster[numCurrentMonsters].description = temp;
 
                     getline(infile, temp, '#');
-                    monster[i].weight = stod(temp);
+                    monster[numCurrentMonsters].weight = stod(temp);
 
                     getline(infile, temp, '#');
-                    monster[i].height = stod(temp);
+                    monster[numCurrentMonsters].height = stod(temp);
 
                     getline(infile, temp, '#');
-                    monster[i].location = temp;
+                    monster[numCurrentMonsters].location = temp;
 
                     getline(infile, temp, '#');
-                    monster[i].dangerLevel = stoi(temp);
+                    monster[numCurrentMonsters].dangerLevel = stoi(temp);
 
                     getline(infile, temp, '#');
-                    monster[i].cData.numCareHours = stoi(temp);
+                    monster[numCurrentMonsters].cData.numCareHours = stoi(temp);
 
                     getline(infile, temp, '#');
-                    monster[i].cData.costPerHour = stod(temp);
+                    monster[numCurrentMonsters].cData.costPerHour = stod(temp);
 
                     getline(infile, temp, '#');
-                    monster[i].cData.foodCost = stod(temp);
+                    monster[numCurrentMonsters].cData.foodCost = stod(temp);
 
                     getline(infile, temp, '#');
-                    monster[i].cData.materialCost = stod(temp);
+                    monster[numCurrentMonsters].cData.materialCost = stod(temp);
 
                     //print the name of the monster added
-                    cout << monster[i].name << " has been added." << endl;
+                    cout << monster[numCurrentMonsters].name << " has been added." << endl;
 
                     //increment the number of monsters
                     numCurrentMonsters++;
@@ -80,7 +80,7 @@ int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
                 cout << "All creatures from " << monsterData << " have been added to the program." << endl;
                 break;
             }
-        }
+        
 
     }
 
