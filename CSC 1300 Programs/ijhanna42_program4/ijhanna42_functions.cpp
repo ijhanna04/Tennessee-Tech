@@ -18,64 +18,66 @@ int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
 
     //check if file could open before reading from it
     string line;
-    while(infile.is_open()){
-        if (numCurrentMonsters >= maxCapacity){
-            cout << "No more monsters can be registered at this time. Zoo is at full capacity." << endl;
+    if(infile.is_open()){
+        while (!infile.eof()){
+            if (numCurrentMonsters >= maxCapacity){
+                cout << "No more monsters can be registered at this time. Zoo is at full capacity." << endl;
 
-        } else {           
-            for(int i = 0; i < numCurrentMonsters; i++){
+            } else {           
+                for(int i = 0; i < numCurrentMonsters; i++){
 
-                //check to make sure the number of monsters is not already 75
-                if (numCurrentMonsters >= maxCapacity){
+                    //check to make sure the number of monsters is not already 75
+                    if (numCurrentMonsters >= maxCapacity){
 
-                    //tell user that zoo is at full capacity
-                    cout << "No more monsters can be registered at this time. Zoo is at full capacity.";
-                    break;
+                        //tell user that zoo is at full capacity
+                        cout << "No more monsters can be registered at this time. Zoo is at full capacity.";
+                        break;
+                    }
+
+                    //read each monster from the file and place the data in the correct element in the Monster array
+                    string temp;
+
+                    getline(infile, temp, '#');
+                    monster[i].name = temp;
+
+                    getline(infile, temp, '#');
+                    monster[i].description = temp;
+
+                    getline(infile, temp, '#');
+                    monster[i].weight = stod(temp);
+
+                    getline(infile, temp, '#');
+                    monster[i].height = stod(temp);
+
+                    getline(infile, temp, '#');
+                    monster[i].location = temp;
+
+                    getline(infile, temp, '#');
+                    monster[i].dangerLevel = stoi(temp);
+
+                    getline(infile, temp, '#');
+                    monster[i].cData.numCareHours = stoi(temp);
+
+                    getline(infile, temp, '#');
+                    monster[i].cData.costPerHour = stod(temp);
+
+                    getline(infile, temp, '#');
+                    monster[i].cData.foodCost = stod(temp);
+
+                    getline(infile, temp, '#');
+                    monster[i].cData.materialCost = stod(temp);
+
+                    //print the name of the monster added
+                    cout << monster[i].name << " has been added." << endl;
+
+                    //increment the number of monsters
+                    numCurrentMonsters++;
+                
                 }
 
-                //read each monster from the file and place the data in the correct element in the Monster array
-                string temp;
-
-                getline(infile, temp, '#');
-                monster[i].name = temp;
-
-                getline(infile, temp, '#');
-                monster[i].description = temp;
-
-                getline(infile, temp, '#');
-                monster[i].weight = stod(temp);
-
-                getline(infile, temp, '#');
-                monster[i].height = stod(temp);
-
-                getline(infile, temp, '#');
-                monster[i].location = temp;
-
-                getline(infile, temp, '#');
-                monster[i].dangerLevel = stoi(temp);
-
-                getline(infile, temp, '#');
-                monster[i].cData.numCareHours = stoi(temp);
-
-                getline(infile, temp, '#');
-                monster[i].cData.costPerHour = stod(temp);
-
-                getline(infile, temp, '#');
-                monster[i].cData.foodCost = stod(temp);
-
-                getline(infile, temp, '#');
-                monster[i].cData.materialCost = stod(temp);
-
-                //print the name of the monster added
-                cout << monster[i].name << " has been added." << endl;
-
-                //increment the number of monsters
-                numCurrentMonsters++;
-            
+                infile.close();
+                cout << "All creatures from " << monsterData << " have been added to the program." << endl;
             }
-
-            infile.close();
-            cout << "All creatures from " << monsterData << " have been added to the program." << endl;
         }
 
     }
