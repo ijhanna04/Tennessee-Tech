@@ -3,6 +3,7 @@
 int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
     string monsterData;
     ifstream infile;
+    numCurrentMonsters = 0;
 
     //ask user what the name of the file is that they would like to load the monsters from
     cout << "What is the name of the file with your monster data? (ex: filename.txt)\n";
@@ -71,6 +72,8 @@ int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
             //return the updated number of monsters loaded into the array
             
         }
+    } else {
+        cout << "Could not open file.";
     }
     return numCurrentMonsters;
 
