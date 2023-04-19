@@ -16,12 +16,12 @@ int main(){
     int currNumMonsters = 0;
 
     //choice variable declarations
-    int menuChoice;
-    char saveChoice;
+    int menuChoice = 0;
+    
 
     //welcome message with loadMonstersFromFile call
     cout << "WELCOME TO THE MONSTER ZOO PROGRAM!!\n";
-    loadMonstersFromFile(currNumMonsters, monster);
+    currNumMonsters = loadMonstersFromFile(currNumMonsters, monster);
 
     //menu options loop
     do{
@@ -39,10 +39,10 @@ int main(){
         //menu options choices
         switch (menuChoice){
             case 1:
-                registerMonster(currNumMonsters, monster);
+                currNumMonsters = registerMonster(currNumMonsters, monster);
                 break;
             case 2:
-                removeMonster(currNumMonsters, monster);
+                currNumMonsters = removeMonster(currNumMonsters, monster);
                 break;
             case 3:
                 printMonsters(currNumMonsters, monster);
@@ -51,6 +51,7 @@ int main(){
                 printCostInfo(currNumMonsters, monster);
                 break;
             case 5:
+                char saveChoice = ' ';
                 //ask user if they wish to save monster data to a file
                 cout << "Would you like to save your monster list to a file? (y or n) ";
                 cin >> saveChoice;

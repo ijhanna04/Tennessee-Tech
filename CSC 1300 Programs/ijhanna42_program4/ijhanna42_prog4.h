@@ -2,13 +2,14 @@
 #define IJHANNA42_PROG3_H
 
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 using namespace std;
 
 const int maxCapacity = 75;
 
 //Cost structure
-struct Cost{
+struct Cost {
     int numCareHours;
     double costPerHour;
     double foodCost;
@@ -17,7 +18,7 @@ struct Cost{
 
 
 //Monsters structure
-struct Monsters{
+struct Monsters {
     string name;
     string description;
     double weight;
