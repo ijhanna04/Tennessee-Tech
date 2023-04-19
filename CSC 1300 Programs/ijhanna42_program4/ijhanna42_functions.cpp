@@ -17,7 +17,9 @@ int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
     }
 
     //check if file could open before reading from it
-    if(infile.is_open()){
+    string line;
+    
+    while(getline(infile, line)){
         if (numCurrentMonsters >= maxCapacity){
             cout << "No more monsters can be registered at this time. Zoo is at full capacity." << endl;
 
@@ -33,36 +35,37 @@ int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
                 }
 
                 //read each monster from the file and place the data in the correct element in the Monster array
+                stringstream ss(line);
                 string temp;
 
-                getline(infile, temp, '#');
+                getline(ss, temp, '#');
                 monster[i].name = temp;
 
-                getline(infile, temp, '#');
+                getline(ss, temp, '#');
                 monster[i].description = temp;
 
-                getline(infile, temp, '#');
+                getline(ss, temp, '#');
                 monster[i].weight = stod(temp);
 
-                getline(infile, temp, '#');
+                getline(ss, temp, '#');
                 monster[i].height = stod(temp);
 
-                getline(infile, temp, '#');
+                getline(ss, temp, '#');
                 monster[i].location = temp;
 
-                getline(infile, temp, '#');
+                getline(ss, temp, '#');
                 monster[i].dangerLevel = stoi(temp);
 
-                getline(infile, temp, '#');
+                getline(ss, temp, '#');
                 monster[i].cData.numCareHours = stoi(temp);
 
-                getline(infile, temp, '#');
+                getline(ss, temp, '#');
                 monster[i].cData.costPerHour = stod(temp);
 
-                getline(infile, temp, '#');
+                getline(ss, temp, '#');
                 monster[i].cData.foodCost = stod(temp);
 
-                getline(infile, temp, '#');
+                getline(ss, temp, '#');
                 monster[i].cData.materialCost = stod(temp);
 
                 //print the name of the monster added
