@@ -91,12 +91,7 @@ int registerMonster(int numCurrentMonsters, Monsters monster[]){
         return numCurrentMonsters;
 
     } else {
-        int i;
-        if (numCurrentMonsters == 0){
-            i = numCurrentMonsters;
-        } else {
-            i = numCurrentMonsters + 1;
-        }
+
         //check to make sure the number of monsters is not already 75
         if (numCurrentMonsters >= maxCapacity){
 
@@ -108,79 +103,82 @@ int registerMonster(int numCurrentMonsters, Monsters monster[]){
         }
 
         //ask user for Monster variables
+        Monsters newMonster;
         cout << "NAME: ";
         cin.ignore();
-        getline(cin, monster[i].name);
+        getline(cin, newMonster.name);
 
         cout << "DESCRIPTION: ";
-        getline(cin, monster[i].description);
+        getline(cin, newMonster.description);
 
         cout << "WEIGHT (in pounds): ";
-        cin >> monster[i].weight;
+        cin >> newMonster.weight;
             //validate that weight is over zero pounds
-            while(monster[i].weight <= 0){
+            while(newMonster.weight <= 0){
                 cout << "Invalid Weight. Enter a Weight greater than 0: ";
-                cin >> monster[i].weight;
+                cin >> newMonster.weight;
             }
 
         cout << "HEIGHT (in feet): ";
-        cin >> monster[i].height;
+        cin >> newMonster.height;
             //validate that height is taller than zero feet
-            while(monster[i].height <= 0){
+            while(newMonster.height <= 0){
                 cout << "Invalid Height. Enter a Height greater than 0: ";
-                cin >> monster[i].height;
+                cin >> newMonster.height;
             }
 
         cout << "LAST KNOWN LOCATION: ";
         cin.ignore();
-        getline(cin, monster[i].location);
+        getline(cin, newMonster.location);
 
         cout << "DANGER LEVEL (1-5): ";
-        cin >> monster[i].dangerLevel;
+        cin >> newMonster.dangerLevel;
             //validate that level is 1 through 5
-            while((monster[i].dangerLevel < 1) || (monster[i].dangerLevel > 5)){
+            while((newMonster.dangerLevel < 1) || (newMonster.dangerLevel > 5)){
                 cout << "Invalid Danger Level. Enter a Danger Level between 1 and 5: ";
-                cin >> monster[i].dangerLevel;
+                cin >> newMonster.dangerLevel;
             }
 
         cout << "CARE INFORMATION (per week):\n";
 
         cout << "        Required direct care for monster (in hours) ";
-        cin >> monster[i].cData.numCareHours;
+        cin >> newMonster.cData.numCareHours;
             //validate that input is not negative
-            while(monster[i].cData.numCareHours < 0){
+            while(newMonster.cData.numCareHours < 0){
                 cout << "Invalid Number of Care Hours. Enter a positive number of Care Hours: ";
-                cin >> monster[i].cData.numCareHours;
+                cin >> newMonster.cData.numCareHours;
             }
 
         cout << "        Cost of care $";
-        cin >> monster[i].cData.costPerHour;
+        cin >> newMonster.cData.costPerHour;
             //validate that input is not negative
-            while(monster[i].cData.costPerHour < 0){
+            while(newMonster.cData.costPerHour < 0){
                 cout << "Invalid Cost per Hour. Enter a positive Cost per Hour: ";
-                cin >> monster[i].cData.costPerHour;
+                cin >> newMonster.cData.costPerHour;
             }
 
         cout << "        Food cost $";
-        cin >> monster[i].cData.foodCost;
+        cin >> newMonster.cData.foodCost;
             //validate that input is not negative
-            while(monster[i].cData.foodCost < 0){
+            while(newMonster.cData.foodCost < 0){
                 cout << "Invalid Food Cost. Enter a positive Food Cost: ";
-                cin >> monster[i].cData.foodCost;
+                cin >> newMonster.cData.foodCost;
             }
 
         cout << "        Medical & grooming cost $";
-        cin >> monster[i].cData.materialCost;
+        cin >> newMonster.cData.materialCost;
             //validate that input is not negative
-            while(monster[i].cData.materialCost < 0){
+            while(newMonster.cData.materialCost < 0){
                 cout << "Invalid Medical & Grooming Cost. Enter a positive Medical & Grooming Cost: ";
-                cin >> monster[i].cData.materialCost;
+                cin >> newMonster.cData.materialCost;
             }
 
-        cout << endl << monster[i].name << " has been added." << endl;
+        monster[numCurrentMonsters] = newMonster;
 
         //increment the number of current monsters in the zoo by one
         numCurrentMonsters++;
+
+        cout << endl << newMonster.name << " has been added." << endl;
 
         //return the number of monsters
         return numCurrentMonsters;
@@ -197,11 +195,11 @@ int removeMonster(int numCurrentMonsters, Monsters monster[]){
     }
 
     //ask user which monster is leaving the zoo
+    string nameDelete;
     cout << "\nWhat monster is leaving the zoo?" << endl;
     cout << "\nMONSTER NAME: ";
 
     //read the name and place it in a temporary string variable
-    string nameDelete;
     cin.ignore();
     getline(cin, nameDelete);
 
@@ -214,19 +212,15 @@ int removeMonster(int numCurrentMonsters, Monsters monster[]){
         }
     }
 
-    //overwrite element with the next element in the array
-    for (int i = indexToDelete; i < numCurrentMonsters - 1; i++) {
-        monster[i] = monster[i + 1];
-    }
-
-
-
-    
-
     //if the monster with the given name was not found, inform user
     if (indexToDelete == -1) {
         cout << endl << "Sorry, a monster by the name " << nameDelete << " could not be found." << endl;
         return numCurrentMonsters;
+    }
+
+    //overwrite element with the next element in the array
+    for (int i = indexToDelete; i < numCurrentMonsters - 1; i++) {
+        monster[i] = monster[i + 1];
     }
 
     //decrement the number of monsters in the zoo and print out name of monster deleted
@@ -243,14 +237,14 @@ void printMonsters(int numCurrentMonsters, Monsters monster[]){
     string lineOfDashes(50, '-');
 
     //if there are no monsters in the zoo, inform user
-    if (numCurrentMonsters < 1){
-        cout << "THERE ARE NO MONSTERS AT YOUR ZOO!\n";
+    if (numCurrentMonsters == 0){
+        cout << "THERE ARE NO MONSTERS AT YOUR ZOO!" << endl;
 
     } else {
         //print out monster info
         for (int i = 0; i < numCurrentMonsters; i++){
             cout << lineOfDashes << endl;
-            cout << "**MONSTER " << i+1 << "**\n";
+            cout << "**MONSTER " << i + 1 << "**\n";
             cout << "Name: " << monster[i].name;
             cout << "Description: " << monster[i].description;
             cout << "Weight: " << fixed << setprecision(2) << monster[i].weight;
@@ -258,17 +252,15 @@ void printMonsters(int numCurrentMonsters, Monsters monster[]){
             cout << "Last known location: " << monster[i].location;
             cout << "Danger level: " << monster[i].dangerLevel;
             cout << "Weekly Care Information:\n";
-            cout << "        -Hours of care required:      " << fixed << setprecision(2) << monster[i].cData.numCareHours;
-            cout << "        -Cost of care:                $ " << fixed << setprecision(2) << monster[i].cData.costPerHour;
-            cout << "        -Food cost:                   $ " << fixed << setprecision(2) << monster[i].cData.foodCost;
-            cout << "        -Grooming & Supplies Cost:    $ " << fixed << setprecision(2) << monster[i].cData.materialCost;    
+            cout << "        -Hours of care required:      " << fixed << setprecision(2) << monster[i].cData.numCareHours << endl;
+            cout << "        -Cost of care:                $ " << fixed << setprecision(2) << monster[i].cData.costPerHour << endl;
+            cout << "        -Food cost:                   $ " << fixed << setprecision(2) << monster[i].cData.foodCost << endl;
+            cout << "        -Grooming & Supplies Cost:    $ " << fixed << setprecision(2) << monster[i].cData.materialCost << endl;    
         }
     }
 }
 
 void printCostInfo(int numCurrentMonsters, Monsters monster[]){
-    
-    double totalCost = 0.0;
 
     //if there are no monsters in the zoo, inform user
     if (numCurrentMonsters == 0){
@@ -277,35 +269,35 @@ void printCostInfo(int numCurrentMonsters, Monsters monster[]){
 
     } else {
 
+        double totalCost = 0.0;
+
         cout << "MONSTER" << right << "CARE COST";
         for (int i = 0; i < numCurrentMonsters; i++){
-            double careCost;
 
-            //calculation for care cost
-            careCost = monster[i].cData.numCareHours * monster[i].cData.costPerHour + monster[i].cData.foodCost + monster[i].cData.materialCost;
-            
+            //calculation for careCost and totalCost
+            double careCost = monster[i].cData.numCareHours * monster[i].cData.costPerHour + monster[i].cData.foodCost + monster[i].cData.materialCost;
+            totalCost += careCost;
+
             //print total cost for each monster
             cout << monster[i].name << "$" << fixed << setprecision(2) <<  careCost << endl;
-
-            //running total for total cost of all the monsters
-            totalCost += careCost;
         }
 
         //print total cost to care for all the monsters
-        cout << "TOTAL COST" << right << "$" << totalCost;
+        cout << "TOTAL COST" << "$" << fixed << setprecision(2) << totalCost << endl;
     }
 
 }
 
 void saveMonstersToFile(int numCurrentMonsters, Monsters monster[]){
-    string filename;
-    ofstream outfile;
 
     //if there are no monsters in the zoo, inform user that there is nothing to be saved
     if (numCurrentMonsters == 0){
         cout << "There are no monsters in the zoo so none can be saved to a file.\n";
         return;
     } else {
+
+        string filename;
+        ofstream outfile;
 
         //ask user what the name of the file is that they should save their monsters to
         cout << "What is the name of the file you want to save your creatures to?\n";
@@ -321,15 +313,15 @@ void saveMonstersToFile(int numCurrentMonsters, Monsters monster[]){
 
         //write monster data to file
         for (int i = 0; i < numCurrentMonsters; i++){
-            outfile << monster[i].name << "#";
-            outfile << monster[i].description << "#";
-            outfile << monster[i].weight << "#";
-            outfile << monster[i].height << "#";
-            outfile << monster[i].location << "#";
-            outfile << monster[i].cData.numCareHours << "#";
-            outfile << monster[i].cData.costPerHour << "#";
-            outfile << monster[i].cData.foodCost << "#";
-            outfile << monster[i].cData.materialCost << "#";
+            outfile << monster[i].name << "#"
+            << monster[i].description << "#"
+            << monster[i].weight << "#"
+            << monster[i].height << "#"
+            << monster[i].location << "#"
+            << monster[i].cData.numCareHours << "#"
+            << monster[i].cData.costPerHour << "#"
+            << monster[i].cData.foodCost << "#"
+            << monster[i].cData.materialCost << "#";
         }
 
         outfile.close();
