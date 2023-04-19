@@ -163,7 +163,7 @@ int removeMonster(Monster monsters[], int numMonsters) {
 }
 
 void printMonsters(Monster monsters[], int numMonsters) {
-    if (numMonsters == 0) {
+    if (numMonsters == -1) {
         cout << "THERE ARE NO MONSTERS AT YOUR ZOO!" << endl;
         return;
     }
@@ -187,7 +187,7 @@ void printMonsters(Monster monsters[], int numMonsters) {
 }
 
 void printCostInfo(Monster Monsters[], int numMonsters) {
-    if (numMonsters == 0) {
+    if (numMonsters == -1) {
         cout << "There are no monsters in the zoo so the total cost is $0.00." << endl;
         return;
     }
