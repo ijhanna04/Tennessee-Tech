@@ -25,8 +25,7 @@ int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
                 break;
 
             } else {           
-                for(int i = 0; i < numCurrentMonsters; i++){
-
+                
                     //check to make sure the number of monsters is not already 75
                     if (numCurrentMonsters >= maxCapacity){
 
@@ -34,6 +33,7 @@ int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
                         cout << "No more monsters can be registered at this time. Zoo is at full capacity.";
                         break;
                     }
+                    for(int i = 0; i < numCurrentMonsters; i++){
 
                     //read each monster from the file and place the data in the correct element in the Monster array
                     string temp;
