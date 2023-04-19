@@ -2,6 +2,7 @@
 #define PROG4_H
 
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <sstream>
 using namespace std;
