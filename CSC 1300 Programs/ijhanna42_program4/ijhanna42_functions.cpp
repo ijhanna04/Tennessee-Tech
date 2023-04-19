@@ -22,6 +22,7 @@ int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
         while (!infile.eof()){
             if (numCurrentMonsters >= maxCapacity){
                 cout << "No more monsters can be registered at this time. Zoo is at full capacity." << endl;
+                break;
 
             } else {           
                 for(int i = 0; i < numCurrentMonsters; i++){
@@ -77,6 +78,7 @@ int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
 
                 infile.close();
                 cout << "All creatures from " << monsterData << " have been added to the program." << endl;
+                break;
             }
         }
 
