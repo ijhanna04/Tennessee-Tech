@@ -18,6 +18,7 @@ int loadMonstersFromFile(Monster monsters[], int numMonsters) {
             break;
         }
 
+    for (int i; i < numMonsters; i++){
         stringstream ss(line);
         string temp;
 
@@ -54,7 +55,7 @@ int loadMonstersFromFile(Monster monsters[], int numMonsters) {
 
         cout << monsters[numMonsters].name << " has been added." << endl;
         numMonsters++;
-        
+    }
     }
 
     infile.close();
