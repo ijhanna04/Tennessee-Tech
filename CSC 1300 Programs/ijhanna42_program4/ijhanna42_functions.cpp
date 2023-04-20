@@ -18,6 +18,7 @@ int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
         return numCurrentMonsters;
     }
 
+    //make sure there are no more monsters than the maxCapacity
     string line;
     while (getline(infile, line, '#')){
         if (numCurrentMonsters >= maxCapacity){
