@@ -295,7 +295,6 @@ void saveMonstersToFile(int numCurrentMonsters, Monsters monster[]){
     } else {
 
         string filename;
-        ofstream outfile;
 
         //ask user what the name of the file is that they should save their monsters to
         cout << "What is the name of the file you want to save your creatures to?\n";
@@ -303,7 +302,7 @@ void saveMonstersToFile(int numCurrentMonsters, Monsters monster[]){
         cin >> filename;
 
         //open file of the given name
-        outfile.open(filename);
+        ofstream outfile(filename);
         if (!outfile){
             cout << "Error opening file " << filename << endl;
             return;
