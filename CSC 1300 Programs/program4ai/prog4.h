@@ -17,8 +17,8 @@ struct Cost {
 struct Monster {
     string name;
     string description;
-    int weightInPounds;
-    int heightInFeet;
+    double weightInPounds;
+    double heightInFeet;
     string location;
     int dangerLevel;
     Cost cost;

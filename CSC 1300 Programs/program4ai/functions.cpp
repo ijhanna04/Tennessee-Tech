@@ -28,10 +28,10 @@ int loadMonstersFromFile(Monster monsters[], int numMonsters) {
         monsters[numMonsters].description = temp;
 
         getline(ss, temp, '#');
-        monsters[numMonsters].weightInPounds = stoi(temp);
+        monsters[numMonsters].weightInPounds = stod(temp);
 
         getline(ss, temp, '#');
-        monsters[numMonsters].heightInFeet = stoi(temp);
+        monsters[numMonsters].heightInFeet = stod(temp);
 
         getline(ss, temp, '#');
         monsters[numMonsters].location = temp;
@@ -68,7 +68,6 @@ int registerMonster(Monster monsters[], int numMonsters) {
     }
 
     Monster newMonster;
-    newMonster.heightInFeet = 1;
     cout << "NAME: ";
     cin.ignore();
     getline(cin, newMonster.name);
