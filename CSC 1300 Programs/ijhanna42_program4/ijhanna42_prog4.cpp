@@ -21,7 +21,7 @@ int main(){
 
     //welcome message with loadMonstersFromFile call
     cout << "WELCOME TO THE MONSTER ZOO PROGRAM!!\n";
-    // currNumMonsters = loadMonstersFromFile(currNumMonsters, monster);
+    currNumMonsters = loadMonstersFromFile(currNumMonsters, monster);
 
     //menu options loop
     do{
