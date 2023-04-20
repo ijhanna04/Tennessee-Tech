@@ -26,51 +26,51 @@ int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
 
         }       
 
-            //read each monster from the file and place the data in the correct element in the Monster array
-            stringstream ss(line);
-            string temp;
+        //read each monster from the file and place the data in the correct element in the Monster array
+        stringstream ss(line);
+        string temp;
 
-            getline(ss, temp, '#');
-            monster[numCurrentMonsters].name = temp;
+        getline(ss, temp, '#');
+        monster[numCurrentMonsters].name = temp;
 
-            getline(ss, temp, '#');
-            monster[numCurrentMonsters].description = temp;
+        getline(ss, temp, '#');
+        monster[numCurrentMonsters].description = temp;
 
-            getline(ss, temp, '#');
-            monster[numCurrentMonsters].weight = stod(temp);
+        getline(ss, temp, '#');
+        monster[numCurrentMonsters].weight = stod(temp);
 
-            getline(ss, temp, '#');
-            monster[numCurrentMonsters].height = stod(temp);
+        getline(ss, temp, '#');
+        monster[numCurrentMonsters].height = stod(temp);
 
-            getline(ss, temp, '#');
-            monster[numCurrentMonsters].location = temp;
+        getline(ss, temp, '#');
+        monster[numCurrentMonsters].location = temp;
 
-            getline(ss, temp, '#');
-            monster[numCurrentMonsters].dangerLevel = stoi(temp);
+        getline(ss, temp, '#');
+        monster[numCurrentMonsters].dangerLevel = stoi(temp);
 
-            getline(ss, temp, '#');
-            monster[numCurrentMonsters].cData.numCareHours = stoi(temp);
+        getline(ss, temp, '#');
+        monster[numCurrentMonsters].cData.numCareHours = stoi(temp);
 
-            getline(ss, temp, '#');
-            monster[numCurrentMonsters].cData.costPerHour = stod(temp);
+        getline(ss, temp, '#');
+        monster[numCurrentMonsters].cData.costPerHour = stod(temp);
 
-            getline(ss, temp, '#');
-            monster[numCurrentMonsters].cData.foodCost = stod(temp);
+        getline(ss, temp, '#');
+        monster[numCurrentMonsters].cData.foodCost = stod(temp);
 
-            getline(ss, temp, '#');
-            monster[numCurrentMonsters].cData.materialCost = stod(temp);
+        getline(ss, temp, '#');
+        monster[numCurrentMonsters].cData.materialCost = stod(temp);
 
-            //print the name of the monster added
-            cout << monster[numCurrentMonsters].name << " has been added." << endl;
+        //print the name of the monster added
+        cout << monster[numCurrentMonsters].name << " has been added." << endl;
 
-            //increment the number of monsters
-            numCurrentMonsters++;
+        //increment the number of monsters
+        numCurrentMonsters++;
                 
-            cout << "All creatures from " << monsterData << " have been added to the program." << endl;
-            break;
+        
     }
     
     infile.close();
+    cout << "All creatures from " << monsterData << " have been added to the program." << endl;
 
     //return the updated number of monsters loaded into the array
     return numCurrentMonsters;
@@ -271,7 +271,7 @@ void printCostInfo(int numCurrentMonsters, Monsters monster[]){
 
         double totalCost = 0.0;
 
-        cout << "MONSTER" << right << "CARE COST";
+        cout << "MONSTER                    CARE COST" << endl;
         for (int i = 0; i < numCurrentMonsters; i++){
 
             //calculation for careCost and totalCost
@@ -283,7 +283,7 @@ void printCostInfo(int numCurrentMonsters, Monsters monster[]){
         }
 
         //print total cost to care for all the monsters
-        cout << "TOTAL COST" << "$" << fixed << setprecision(2) << totalCost << endl;
+        cout << "TOTAL COST                 $" << fixed << setprecision(2) << totalCost << endl;
     }
 
 }
@@ -292,40 +292,39 @@ void saveMonstersToFile(int numCurrentMonsters, Monsters monster[]){
 
     //if there are no monsters in the zoo, inform user that there is nothing to be saved
     if (numCurrentMonsters == 0){
-        cout << "There are no monsters in the zoo so none can be saved to a file.\n";
+        cout << "There are no monsters in the zoo so none can be saved to a file." << endl;
         return;
-    } else {
+    } 
 
-        string filename;
+    string filename;
 
-        //ask user what the name of the file is that they should save their monsters to
-        cout << "What is the name of the file you want to save your creatures to?\n";
-        cout << "FILENAME: ";
-        cin >> filename;
+    //ask user what the name of the file is that they should save their monsters to
+    cout << "What is the name of the file you want to save your creatures to?" << endl;
+    cout << "FILENAME: ";
+    cin >> filename;
 
-        //open file of the given name
-        ofstream outfile(filename);
-        if (!outfile){
-            cout << "Error opening file " << filename << endl;
-            return;
-        }
-
-        //write monster data to file
-        for (int i = 0; i < numCurrentMonsters; i++){
-            outfile << monster[i].name << "#"
-            << monster[i].description << "#"
-            << monster[i].weight << "#"
-            << monster[i].height << "#"
-            << monster[i].location << "#"
-            << monster[i].cData.numCareHours << "#"
-            << monster[i].cData.costPerHour << "#"
-            << monster[i].cData.foodCost << "#"
-            << monster[i].cData.materialCost << "#";
-        }
-
-        outfile.close();
-
-        //print confirmation of file save
-        cout << "All monsters currently housed in the zoo were successfully saved to the " << filename << " file." << endl;
+    //open file of the given name
+    ofstream outfile(filename);
+    if (!outfile){
+        cout << "Error opening file " << filename << endl;
+        return;
     }
+
+    //write monster data to file
+    for (int i = 0; i < numCurrentMonsters; i++){
+        outfile << monster[i].name << "#"
+        << monster[i].description << "#"
+        << monster[i].weight << "#"
+        << monster[i].height << "#"
+        << monster[i].location << "#"
+        << monster[i].cData.numCareHours << "#"
+        << monster[i].cData.costPerHour << "#"
+        << monster[i].cData.foodCost << "#"
+        << monster[i].cData.materialCost << "#";
+    }
+
+    outfile.close();
+
+    //print confirmation of file save
+    cout << "All monsters currently housed in the zoo were successfully saved to the " << filename << " file." << endl;
 }

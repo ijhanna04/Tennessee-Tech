@@ -220,7 +220,7 @@ void saveMonstersToFile(Monster monsters[], int numMonsters) {
     }
 
     for (int i = 0; i < numMonsters; i++) {
-        outfile << monsters[i].name << "#" << monsters[i].description << "#" << monsters[i].weightInPounds << "#" << monsters[i].heightInFeet << "#" << monsters[i].location << "#" << monsters[i].dangerLevel << "#" << monsters[i].cost.hoursPerWeek << "#" << monsters[i].cost.costPerWeek << "#" << monsters[i].cost.foodCostPerWeek << "#" << monsters[i].cost.materialsCostPerWeek;
+        outfile << monsters[i].name << "#" << monsters[i].description << "#" << monsters[i].weightInPounds << "#" << monsters[i].heightInFeet << "#" << monsters[i].location << "#" << monsters[i].dangerLevel << "#" << monsters[i].cost.hoursPerWeek << "#" << monsters[i].cost.costPerWeek << "#" << monsters[i].cost.foodCostPerWeek << "#" << monsters[i].cost.materialsCostPerWeek << '#';
     }
 
     outfile.close();
