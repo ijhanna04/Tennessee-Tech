@@ -68,6 +68,7 @@ int registerMonster(Monster monsters[], int numMonsters) {
     }
 
     Monster newMonster;
+    newMonster.heightInFeet = 1;
     cout << "NAME: ";
     cin.ignore();
     getline(cin, newMonster.name);
@@ -81,6 +82,7 @@ int registerMonster(Monster monsters[], int numMonsters) {
         cout << "Invalid weight. Please enter a weight greater than 0." << endl;
         cin >> newMonster.weightInPounds;
     }
+
 
     cout << "HEIGHT (in feet): ";
     cin >> newMonster.heightInFeet;

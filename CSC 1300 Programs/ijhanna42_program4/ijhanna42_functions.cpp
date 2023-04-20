@@ -2,7 +2,7 @@
 
 int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
     string monsterData;
-    monster[maxCapacity];
+
     
     //ask user what the name of the file is that they would like to load the monsters from
     cout << "What is the name of the file with your monster data? (ex: filename.txt)" << endl;
@@ -107,6 +107,7 @@ int registerMonster(int numCurrentMonsters, Monsters monster[]){
         cout << "DESCRIPTION: ";
         getline(cin, newMonster.description);
 
+        newMonster.weight = 0;
         cout << "WEIGHT (in pounds): ";
         cin >> newMonster.weight;
             //validate that weight is over zero pounds
@@ -115,6 +116,7 @@ int registerMonster(int numCurrentMonsters, Monsters monster[]){
                 cin >> newMonster.weight;
             }
 
+        newMonster.height = 1;
         cout << "HEIGHT (in feet): ";
         cin >> newMonster.height;
             //validate that height is taller than zero feet
