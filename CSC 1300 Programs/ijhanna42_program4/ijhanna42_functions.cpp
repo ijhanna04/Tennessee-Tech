@@ -49,7 +49,7 @@ int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
         monster[numCurrentMonsters].dangerLevel = stoi(temp);
 
         getline(infile, temp, '#');
-        monster[numCurrentMonsters].cData.numCareHours = stoi(temp);
+        monster[numCurrentMonsters].cData.numCareHours = stod(temp);
 
         getline(infile, temp, '#');
         monster[numCurrentMonsters].cData.costPerHour = stod(temp);
