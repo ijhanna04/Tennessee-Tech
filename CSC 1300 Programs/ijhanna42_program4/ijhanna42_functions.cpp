@@ -30,8 +30,8 @@ int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
         string temp;
 
 
-        getline(infile, temp, '#');
-        monster[numCurrentMonsters].name = temp;
+
+        monster[numCurrentMonsters].name = line;
 
         getline(infile, temp, '#');
         monster[numCurrentMonsters].description = temp;
