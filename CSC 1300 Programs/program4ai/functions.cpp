@@ -51,8 +51,10 @@ int loadMonstersFromFile(Monster monsters[], int numMonsters) {
         getline(ss, temp, '#');
         monsters[i].cost.materialsCostPerWeek = stod(temp);
 
+
         cout << monsters[i].name << " has been added." << endl;
         numMonsters++;
+        break;
     }
     }
 
