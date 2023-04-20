@@ -17,42 +17,43 @@ int loadMonstersFromFile(Monster monsters[], int numMonsters) {
             cout << "Zoo is at maximum capacity." << endl;
             break;
         }
-        
+        for (int i; i < numMonsters; i++){
         stringstream ss(line);
         string temp;
 
         getline(ss, temp, '#');
-        monsters[numMonsters].name = temp;
+        monsters[i].name = temp;
 
         getline(ss, temp, '#');
-        monsters[numMonsters].description = temp;
+        monsters[i].description = temp;
 
         getline(ss, temp, '#');
-        monsters[numMonsters].weightInPounds = stod(temp);
+        monsters[i].weightInPounds = stod(temp);
 
         getline(ss, temp, '#');
-        monsters[numMonsters].heightInFeet = stod(temp);
+        monsters[i].heightInFeet = stod(temp);
 
         getline(ss, temp, '#');
-        monsters[numMonsters].location = temp;
+        monsters[i].location = temp;
 
         getline(ss, temp, '#');
-        monsters[numMonsters].dangerLevel = stoi(temp);
+        monsters[i].dangerLevel = stoi(temp);
 
         getline(ss, temp, '#');
-        monsters[numMonsters].cost.hoursPerWeek = stoi(temp);
+        monsters[i].cost.hoursPerWeek = stoi(temp);
 
         getline(ss, temp, '#');
-        monsters[numMonsters].cost.costPerWeek = stod(temp);
+        monsters[i].cost.costPerWeek = stod(temp);
 
         getline(ss, temp, '#');
-        monsters[numMonsters].cost.foodCostPerWeek = stod(temp);
+        monsters[i].cost.foodCostPerWeek = stod(temp);
 
         getline(ss, temp);
-        monsters[numMonsters].cost.materialsCostPerWeek = stod(temp);
+        monsters[i].cost.materialsCostPerWeek = stod(temp);
 
-        cout << monsters[numMonsters].name << " has been added." << endl;
+        cout << monsters[i].name << " has been added." << endl;
         numMonsters++;
+    }
     }
 
     infile.close();

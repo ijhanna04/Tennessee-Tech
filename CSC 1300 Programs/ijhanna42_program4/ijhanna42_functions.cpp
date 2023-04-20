@@ -3,7 +3,6 @@
 int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
     string monsterData;
 
-    
     //ask user what the name of the file is that they would like to load the monsters from
     cout << "What is the name of the file with your monster data? (ex: filename.txt)" << endl;
     cout << "FILENAME: ";
@@ -117,8 +116,7 @@ int registerMonster(int numCurrentMonsters, Monsters monster[]){
                 cout << "Invalid Weight. Enter a Weight greater than 0: ";
                 cin >> newMonster.weight;
             }
-
-        newMonster.height = 1;
+            
         cout << "HEIGHT (in feet): ";
         cin >> newMonster.height;
             //validate that height is taller than zero feet
@@ -271,7 +269,7 @@ void printCostInfo(int numCurrentMonsters, Monsters monster[]){
 
         double totalCost = 0.0;
 
-        cout << "MONSTER                    CARE COST" << endl;
+        cout << setw(40) << "MONSTER" << right << "CARE COST" << endl;
         for (int i = 0; i < numCurrentMonsters; i++){
 
             //calculation for careCost and totalCost
@@ -279,11 +277,11 @@ void printCostInfo(int numCurrentMonsters, Monsters monster[]){
             totalCost += careCost;
 
             //print total cost for each monster
-            cout << monster[i].name << "$" << fixed << setprecision(2) <<  careCost << endl;
+            cout << setw(40) << monster[i].name << right << "$" << fixed << setprecision(2) <<  careCost << endl;
         }
 
         //print total cost to care for all the monsters
-        cout << "TOTAL COST                 $" << fixed << setprecision(2) << totalCost << endl;
+        cout << setw(40) << "TOTAL COST" << right << "$" << fixed << setprecision(2) << totalCost << endl;
     }
 
 }

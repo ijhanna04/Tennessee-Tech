@@ -59,8 +59,6 @@ int main(){
                 //save options choices
                 if ((saveChoice == 'y') || (saveChoice == 'Y')){
                     saveMonstersToFile(currNumMonsters, monster);
-                } else if ((saveChoice == 'n') || (saveChoice == 'N')){
-                    return 0;
                 }
 
                 break;
