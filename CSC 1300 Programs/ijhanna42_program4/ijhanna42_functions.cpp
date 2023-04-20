@@ -18,7 +18,7 @@ int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
     }
 
     string line;
-    while (getline(infile, line)){
+    while (getline(infile, line, '#')){
         if (numCurrentMonsters >= maxCapacity){
             cout << "No more monsters can be registered at this time. Zoo is at full capacity." << endl;
             break;
@@ -26,38 +26,38 @@ int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
         }       
 
         //read each monster from the file and place the data in the correct element in the Monster array
-        stringstream ss(line);
-        string temp;
-        while (!infile.eof()){
 
-        getline(ss, temp, '#');
+        string temp;
+
+
+        getline(infile, temp, '#');
         monster[numCurrentMonsters].name = temp;
 
-        getline(ss, temp, '#');
+        getline(infile, temp, '#');
         monster[numCurrentMonsters].description = temp;
 
-        getline(ss, temp, '#');
+        getline(infile, temp, '#');
         monster[numCurrentMonsters].weight = stod(temp);
 
-        getline(ss, temp, '#');
+        getline(infile, temp, '#');
         monster[numCurrentMonsters].height = stod(temp);
 
-        getline(ss, temp, '#');
+        getline(infile, temp, '#');
         monster[numCurrentMonsters].location = temp;
 
-        getline(ss, temp, '#');
+        getline(infile, temp, '#');
         monster[numCurrentMonsters].dangerLevel = stoi(temp);
 
-        getline(ss, temp, '#');
+        getline(infile, temp, '#');
         monster[numCurrentMonsters].cData.numCareHours = stoi(temp);
 
-        getline(ss, temp, '#');
+        getline(infile, temp, '#');
         monster[numCurrentMonsters].cData.costPerHour = stod(temp);
 
-        getline(ss, temp, '#');
+        getline(infile, temp, '#');
         monster[numCurrentMonsters].cData.foodCost = stod(temp);
 
-        getline(ss, temp, '#');
+        getline(infile, temp, '#');
         monster[numCurrentMonsters].cData.materialCost = stod(temp);
 
         //print the name of the monster added
@@ -65,7 +65,7 @@ int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
 
         //increment the number of monsters
         numCurrentMonsters++;
-        }
+        
         
     }
     
