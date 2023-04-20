@@ -17,7 +17,7 @@ int loadMonstersFromFile(Monster monsters[], int numMonsters) {
             cout << "Zoo is at maximum capacity." << endl;
             break;
         }
-        for (int i; i < numMonsters; i++){
+        for (int i = 0; i < numMonsters; i++){
         stringstream ss(line);
         string temp;
 
@@ -48,11 +48,13 @@ int loadMonstersFromFile(Monster monsters[], int numMonsters) {
         getline(ss, temp, '#');
         monsters[i].cost.foodCostPerWeek = stod(temp);
 
-        getline(ss, temp);
+        getline(ss, temp, '#');
         monsters[i].cost.materialsCostPerWeek = stod(temp);
+
 
         cout << monsters[i].name << " has been added." << endl;
         numMonsters++;
+        break;
     }
     }
 
