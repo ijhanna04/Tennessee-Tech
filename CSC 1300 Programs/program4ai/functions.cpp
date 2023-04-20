@@ -18,9 +18,10 @@ int loadMonstersFromFile(Monster monsters[], int numMonsters) {
             break;
         }
 
-    for (int i; i < numMonsters; i++){
-        stringstream ss(line);
-        string temp;
+    stringstream ss(line);
+    string temp;
+    while (!infile.eof()){
+        
 
         getline(ss, temp, '#');
         monsters[numMonsters].name = temp;
