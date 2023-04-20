@@ -270,7 +270,7 @@ void printCostInfo(int numCurrentMonsters, Monsters monster[]){
 
         cout << endl << "COST OF EACH MONSTER FOR ONE WEEK: " << endl << endl;
 
-        cout << setw(20) << left << "MONSTER" << setw(21) << right << "CARE COST" << endl;
+        cout << setw(30) << left << "MONSTER" << setw(21) << right << "CARE COST" << endl;
         for (int i = 0; i < numCurrentMonsters; i++){
 
             //calculation for careCost and totalCost
@@ -278,11 +278,11 @@ void printCostInfo(int numCurrentMonsters, Monsters monster[]){
             totalCost += careCost;
 
             //print total cost for each monster
-            cout << setw(20) << left << monster[i].name  << "$" << setw(20) << right << fixed << setprecision(2) <<  careCost << endl;
+            cout << setw(30) << left << monster[i].name  << "$" << setw(20) << right << fixed << setprecision(2) <<  careCost << endl;
         }
 
         //print total cost to care for all the monsters
-        cout << endl << setw(20) << left << "TOTAL COST"  << "$" << setw(20) << right << fixed << setprecision(2) << totalCost;
+        cout << endl << setw(30) << left << "TOTAL COST"  << "$" << setw(20) << right << fixed << setprecision(2) << totalCost;
     }
 
 }
