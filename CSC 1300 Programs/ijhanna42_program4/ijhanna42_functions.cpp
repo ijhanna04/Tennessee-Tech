@@ -28,6 +28,7 @@ int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
         //read each monster from the file and place the data in the correct element in the Monster array
         stringstream ss(line);
         string temp;
+        while (!infile.eof()){
 
         getline(ss, temp, '#');
         monster[numCurrentMonsters].name = temp;
@@ -64,7 +65,7 @@ int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
 
         //increment the number of monsters
         numCurrentMonsters++;
-                
+        }
         
     }
     
@@ -116,7 +117,7 @@ int registerMonster(int numCurrentMonsters, Monsters monster[]){
                 cout << "Invalid Weight. Enter a Weight greater than 0: ";
                 cin >> newMonster.weight;
             }
-            
+
         cout << "HEIGHT (in feet): ";
         cin >> newMonster.height;
             //validate that height is taller than zero feet
