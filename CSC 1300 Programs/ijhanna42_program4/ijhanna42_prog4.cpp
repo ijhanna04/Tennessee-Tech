@@ -26,7 +26,7 @@ int main(){
     //menu options loop
     do{
         //menu options display
-        cout << "What would you like to do?\n";
+        cout << "\n\nWhat would you like to do?\n";
         cout << "   1. Register a New Monster\n";
         cout << "   2. Remove a Monster From Zoo\n";
         cout << "   3. Print Monsters to Screen\n";
