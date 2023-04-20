@@ -17,7 +17,7 @@ int loadMonstersFromFile(Monster monsters[], int numMonsters) {
             cout << "Zoo is at maximum capacity." << endl;
             break;
         }
-
+        
         stringstream ss(line);
         string temp;
 
