@@ -53,12 +53,14 @@ int main(){
             case 5:
                 char saveChoice = ' ';
                 //ask user if they wish to save monster data to a file
-                cout << "Would you like to save your monster list to a file? (y or n) ";
+                cout << endl << "Would you like to save your monster list to a file? (y or n) ";
                 cin >> saveChoice;
 
                 //save options choices
                 if ((saveChoice == 'y') || (saveChoice == 'Y')){
                     saveMonstersToFile(currNumMonsters, monster);
+                    
+                    break;
                 }
 
                 break;

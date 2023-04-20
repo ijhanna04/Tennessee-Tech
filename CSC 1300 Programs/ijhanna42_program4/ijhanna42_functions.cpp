@@ -7,7 +7,7 @@ int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
     cout << "What is the name of the file with your monster data? (ex: filename.txt)" << endl;
     cout << "FILENAME: ";
     cin >> monsterData;
-    cout << endl << endl;
+    cout << endl ;
 
     //open user selected file
     ifstream infile(monsterData);
@@ -100,7 +100,7 @@ int registerMonster(int numCurrentMonsters, Monsters monster[]){
 
         //ask user for Monster variables
         Monsters newMonster;
-        cout << "NAME: ";
+        cout << endl << "NAME: ";
         cin.ignore();
         getline(cin, newMonster.name);
 
@@ -146,27 +146,27 @@ int registerMonster(int numCurrentMonsters, Monsters monster[]){
                 cin >> newMonster.cData.numCareHours;
             }
 
-        cout << "        Cost of care $";
+        cout << "        Cost of care $ ";
         cin >> newMonster.cData.costPerHour;
             //validate that input is not negative
             while(newMonster.cData.costPerHour < 0){
-                cout << "Invalid Cost per Hour. Enter a positive Cost per Hour: ";
+                cout << "Invalid Cost per Hour. Enter a positive Cost per Hour: $ ";
                 cin >> newMonster.cData.costPerHour;
             }
 
-        cout << "        Food cost $";
+        cout << "        Food cost $ ";
         cin >> newMonster.cData.foodCost;
             //validate that input is not negative
             while(newMonster.cData.foodCost < 0){
-                cout << "Invalid Food Cost. Enter a positive Food Cost: ";
+                cout << "Invalid Food Cost. Enter a positive Food Cost: $ ";
                 cin >> newMonster.cData.foodCost;
             }
 
-        cout << "        Medical & grooming cost $";
+        cout << "        Medical & grooming cost $ ";
         cin >> newMonster.cData.materialCost;
             //validate that input is not negative
             while(newMonster.cData.materialCost < 0){
-                cout << "Invalid Medical & Grooming Cost. Enter a positive Medical & Grooming Cost: ";
+                cout << "Invalid Medical & Grooming Cost. Enter a positive Medical & Grooming Cost: $ ";
                 cin >> newMonster.cData.materialCost;
             }
 
@@ -184,7 +184,7 @@ int registerMonster(int numCurrentMonsters, Monsters monster[]){
 
 int removeMonster(int numCurrentMonsters, Monsters monster[]){
 
-    cout << "The following is a list of all the monsters in the zoo:" << endl;
+    cout << endl << "The following is a list of all the monsters in the zoo:" << endl;
 
     //print name of each monster
     for (int i = 0; i < numCurrentMonsters; i++){
@@ -222,7 +222,7 @@ int removeMonster(int numCurrentMonsters, Monsters monster[]){
 
     //decrement the number of monsters in the zoo and print out name of monster deleted
     numCurrentMonsters--;
-    cout << "You have removed " << nameDelete << "." << endl;
+    cout << endl << "You have removed " << nameDelete << "." << endl;
 
     //return the new number of monsters
     return numCurrentMonsters;
@@ -240,7 +240,7 @@ void printMonsters(int numCurrentMonsters, Monsters monster[]){
     } else {
         //print out monster info
         for (int i = 0; i < numCurrentMonsters; i++){
-            cout << lineOfDashes << endl;
+            cout << endl << lineOfDashes << endl;
             cout << "**MONSTER " << i + 1 << "**" << endl;
             cout << "Name: " << monster[i].name << endl;
             cout << "Description: " << monster[i].description << endl;
@@ -252,7 +252,7 @@ void printMonsters(int numCurrentMonsters, Monsters monster[]){
             cout << "        -Hours of care required:      " << fixed << setprecision(2) << monster[i].cData.numCareHours << endl;
             cout << "        -Cost of care:                $ " << fixed << setprecision(2) << monster[i].cData.costPerHour << endl;
             cout << "        -Food cost:                   $ " << fixed << setprecision(2) << monster[i].cData.foodCost << endl;
-            cout << "        -Grooming & Supplies Cost:    $ " << fixed << setprecision(2) << monster[i].cData.materialCost << endl << endl;    
+            cout << "        -Grooming & Supplies Cost:    $ " << fixed << setprecision(2) << monster[i].cData.materialCost << endl;    
         }
     }
 }
@@ -261,14 +261,14 @@ void printCostInfo(int numCurrentMonsters, Monsters monster[]){
 
     //if there are no monsters in the zoo, inform user
     if (numCurrentMonsters == 0){
-        cout << "There are no monsters in the zoo so the total cost is $0.00\n";
+        cout << endl << "There are no monsters in the zoo so the total cost is $0.00\n";
         return;
 
     } else {
 
         double totalCost = 0.0;
 
-        cout << "COST OF EACH MONSTER FOR ONE WEEK: " << endl << endl;
+        cout << endl << "COST OF EACH MONSTER FOR ONE WEEK: " << endl << endl;
 
         cout << setw(20) << left << "MONSTER" << setw(21) << right << "CARE COST" << endl;
         for (int i = 0; i < numCurrentMonsters; i++){
@@ -282,7 +282,7 @@ void printCostInfo(int numCurrentMonsters, Monsters monster[]){
         }
 
         //print total cost to care for all the monsters
-        cout << endl << setw(20) << left << "TOTAL COST"  << "$" << setw(20) << right << fixed << setprecision(2) << totalCost << endl;
+        cout << endl << setw(20) << left << "TOTAL COST"  << "$" << setw(20) << right << fixed << setprecision(2) << totalCost;
     }
 
 }
@@ -291,7 +291,7 @@ void saveMonstersToFile(int numCurrentMonsters, Monsters monster[]){
 
     //if there are no monsters in the zoo, inform user that there is nothing to be saved
     if (numCurrentMonsters == 0){
-        cout << "There are no monsters in the zoo so none can be saved to a file." << endl;
+        cout << endl << "There are no monsters in the zoo so none can be saved to a file." << endl;
         return;
     } 
 
@@ -328,4 +328,5 @@ void saveMonstersToFile(int numCurrentMonsters, Monsters monster[]){
 
     //print confirmation of file save
     cout << endl << "All monsters currently housed in the zoo were successfully saved to the " << filename << " file." << endl;
+    cout << endl << endl << "GOODBYE!";
 }
