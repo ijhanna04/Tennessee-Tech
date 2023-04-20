@@ -49,7 +49,7 @@ int loadMonstersFromFile(int numCurrentMonsters, Monsters monster[]){
         monster[numCurrentMonsters].dangerLevel = stoi(temp);
 
         getline(infile, temp, '#');
-        monster[numCurrentMonsters].cData.numCareHours = stod(temp);
+        monster[numCurrentMonsters].cData.numCareHours = stoi(temp);
 
         getline(infile, temp, '#');
         monster[numCurrentMonsters].cData.costPerHour = stod(temp);
@@ -270,7 +270,7 @@ void printCostInfo(int numCurrentMonsters, Monsters monster[]){
 
         double totalCost = 0.0;
 
-        cout << setw(40) << "MONSTER" << right << "CARE COST" << endl;
+        cout << setw(20) << left << "MONSTER" << setw(21) << right << "CARE COST" << endl;
         for (int i = 0; i < numCurrentMonsters; i++){
 
             //calculation for careCost and totalCost
@@ -278,11 +278,11 @@ void printCostInfo(int numCurrentMonsters, Monsters monster[]){
             totalCost += careCost;
 
             //print total cost for each monster
-            cout << setw(40) << monster[i].name << right << "$" << fixed << setprecision(2) <<  careCost << endl;
+            cout << setw(20) << left << monster[i].name  << "$" << setw(20) << right << fixed << setprecision(2) <<  careCost << endl;
         }
 
         //print total cost to care for all the monsters
-        cout << setw(40) << "TOTAL COST" << right << "$" << fixed << setprecision(2) << totalCost << endl;
+        cout << endl << setw(20) << left << "TOTAL COST"  << "$" << setw(20) << right << fixed << setprecision(2) << totalCost << endl;
     }
 
 }
@@ -316,10 +316,12 @@ void saveMonstersToFile(int numCurrentMonsters, Monsters monster[]){
         << monster[i].weight << "#"
         << monster[i].height << "#"
         << monster[i].location << "#"
+        << monster[i].dangerLevel << "#"
         << monster[i].cData.numCareHours << "#"
         << monster[i].cData.costPerHour << "#"
         << monster[i].cData.foodCost << "#"
         << monster[i].cData.materialCost << "#";
+
     }
 
     outfile.close();

@@ -11,7 +11,7 @@ const int maxCapacity = 75;
 
 //Cost structure
 struct Cost {
-    double numCareHours;
+    int numCareHours;
     double costPerHour;
     double foodCost;
     double materialCost;    
