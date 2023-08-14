@@ -4,7 +4,7 @@
     Date        January 2023
     Purpose:    Convert Celsius to Fahrenheit
 */
-/*test edit*/
+
 #include <iostream>
 using namespace std;
 
