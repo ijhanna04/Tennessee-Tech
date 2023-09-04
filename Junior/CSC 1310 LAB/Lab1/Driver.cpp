@@ -52,7 +52,7 @@ int main ()
 			//LOOK!!
 			//Read in the string from the user and put in the correct array element of the sections array
 			cin >> myCourses[i]->sections[x];
-
+			cin.ignore();
 		}
 		cout << "\n*******************************\n";
 	}
