@@ -1,5 +1,5 @@
-#ifndef COURSE_3
-#define COURSE_3
+#ifndef COURSE_H
+#define COURSE_H
 
 #include <iostream>
 
@@ -7,11 +7,12 @@ using namespace std;
 
 //structure containing Course information
 struct Course {
-    string Name;
-    string Location;
-    //Sections (pointer to an array of strings)
+    string name;
+    string location;
+    string* sections;
     int numSections;
     int numCreditHours;
+
 };
 
 //function prototypes

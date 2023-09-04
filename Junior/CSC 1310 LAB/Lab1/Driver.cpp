@@ -1,7 +1,7 @@
 /*
 	Driver for Course Structure
 	LAB 1 - CSC1310
-	LOOK!!  PUT YOUR NAME HERE******************************************
+	IAN HANNA
 	
 	1/10/2019
 */
@@ -15,6 +15,7 @@ int main ()
 {
 	//LOOK! 
 	//Create a pointer to an array of Course pointers called myCourses here
+	Course** myCourses;
 
 	
 	int numCourses, numSections;
@@ -27,7 +28,7 @@ int main ()
 	
 	//LOOK!!
 	//Dynamically allocate a new array of pointers to Courses of size numCourses and assign this array to myCourses
-	
+	myCourses = new Course*[numCourses];
 	
 	for (int i=0; i< numCourses; i++)
 	{
@@ -43,13 +44,14 @@ int main ()
 		
 		//LOOK!!
 		//Call the createCourse function and make sure to assign the returned value to myCourses[i]
-
+		myCourses[i] = createCourse(name, location, numSections, numHours);
 		
 		for(int x=0; x<numSections; x++)
 		{
 			cout << "\nSECTION " << x+1 << ":\t\t";
 			//LOOK!!
 			//Read in the string from the user and put in the correct array element of the sections array
+			cin >> myCourses[i]->sections[x];
 
 		}
 		cout << "\n*******************************\n";
