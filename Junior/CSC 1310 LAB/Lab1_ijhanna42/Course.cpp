@@ -7,6 +7,7 @@ Course* createCourse(string courseName, string courseLocation, int numSections, 
     course->name = courseName;
     course->location = courseLocation;
     course->numSections = numSections;
+    course->sections = new string[numSections];
     course->numCreditHours = numCredits;
     return course;
 }
@@ -17,10 +18,13 @@ void destroyCourse(Course* course){
 }
 
 void printCourse(Course* myCourse){
-    cout << "COURSE NAME: " << myCourse->name << endl;
-    cout << "LOCATION: " << myCourse->location << endl;
-    cout << "COURSE HOURS: " << myCourse->numCreditHours<< endl;
-    cout << "COURSE SECTIONS: " << myCourse->sections << endl;
+    cout << "COURSE NAME: \t\t" << myCourse->name << endl;
+    cout << "LOCATION: \t\t" << myCourse->location << endl;
+    cout << "COURSE HOURS: \t\t" << myCourse->numCreditHours<< endl;
+    cout << "COURSE SECTIONS: \t\t" << endl;
+    for (int i = 0; i < myCourse->numSections; i++) {
+        cout << "\t\t\t" << myCourse->sections[i] << endl;
+    }
     
 }
 
