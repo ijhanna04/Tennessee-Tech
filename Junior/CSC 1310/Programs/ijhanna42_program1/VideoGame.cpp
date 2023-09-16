@@ -3,7 +3,8 @@
 #include "Text.h"
 
 //VideoGame constructor
-VideoGame(Text* title, Text* developer, Text* publisher, int year){
+VideoGame* VideoGame(Text* title, Text* developer, Text* publisher, int year){
+    VideoGame* videogame = new VideoGame;
     this->title = title;
     this->developer = developer;
     this->publisher = publisher;
@@ -11,7 +12,7 @@ VideoGame(Text* title, Text* developer, Text* publisher, int year){
 }
 
 //~VideoGame destructor
-~VideoGame(){
+VideoGame::~VideoGame(){
     delete title;
     delete developer;
     delete publisher;

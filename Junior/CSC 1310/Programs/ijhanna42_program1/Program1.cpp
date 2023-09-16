@@ -32,22 +32,21 @@ int main(){
 
         switch (menuChoice){
             case 1:
-                loadVideoGamesFromFile();
+                void loadVideoGamesFromFile();
                 break;
             case 2:
-                saveToFile();
+                void saveToFile();
                 break;
             case 3:
-                addVideoGameToArray();
+                void addVideoGameToArray();
                 break;
             case 4:
-                removeVideoGameFromArray();
+                void removeVideoGameFromArray();
                 break;
             case 5:
-                displayVideoGames();
+                void displayVideoGames();
                 break;
             case 6:
-
                 break;
         }
     }while (menuChoice != 6);
