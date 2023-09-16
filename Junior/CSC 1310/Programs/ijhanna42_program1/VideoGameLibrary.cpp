@@ -9,23 +9,8 @@ void resizeVideoGameArray(){
     for (int i = 0; i < this->numGames; i++){
         new_array[i] = this->videoGamesArray[i];
     }
-}
-
-//VideoGameLibrary constructor
-
-//~VideoGameLibrary destructor
-videoGameLibrary(maxGames){
-        this->videoGamesArray = new VideoGame*[maxGames];
-        this->maxGames = maxGames;
-        this->numGames = 0;
-    }
-
-~videoGameLibrary(){
-    for (int i = 0; i < this->numGames; i++){
-        delete this->videoGamesArray[i];
-    }
     delete[] this->videoGamesArray;
-    cout << "VideoGameLibrary destructor: Released memory for each game in the video game array and the array itself.\n";
+    this->videoGamesArray = new_array;
 }
 
 void addVideoGamesToArray(){
