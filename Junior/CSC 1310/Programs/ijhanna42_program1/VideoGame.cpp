@@ -2,17 +2,19 @@
 #include "VideoGame.h"
 #include "Text.h"
 
+using namespace std;
+
 //VideoGame constructor
-VideoGame* VideoGame(Text* title, Text* developer, Text* publisher, int year){
+VideoGame* createVideoGame(Text* vgTitle, Text* vgDeveloper, Text* vgPublisher, int vgYear){
     VideoGame* videogame = new VideoGame;
-    this->title = title;
-    this->developer = developer;
-    this->publisher = publisher;
-    this->year = year;
+    videogame->title = vgTitle;
+    videogame->developer = vgDeveloper;
+    videogame->publisher = vgPublisher;
+    videogame->year = vgYear;
 }
 
 //~VideoGame destructor
-VideoGame::~VideoGame(){
+void destroyVideoGame(VideoGame* videogame){
     delete title;
     delete developer;
     delete publisher;
