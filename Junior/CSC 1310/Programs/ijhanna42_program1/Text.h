@@ -2,21 +2,18 @@
 #define TEXT_H
 
 #include <iostream>
-#include <cstring>
-
 using namespace std;
 
-class Text {
+class Text{
     public:
-        Text(const char*);
+        Text(const char* arr);
         ~Text();
         void displayText();
-        const char* getText();
-        int getLength();
+        const char* getText() const;
+        int getLength() const;
     private:
-        char *textArray;   
+        const char* textArray;  
         int textLength;
-        string str;
 };
 
 #endif

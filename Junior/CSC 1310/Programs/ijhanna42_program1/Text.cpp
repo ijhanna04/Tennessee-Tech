@@ -1,27 +1,27 @@
 #include <iostream>
-#include "Text.h"
-
+#include <string.h>
 using namespace std;
 
-Text::Text(const char* text){
-    textLength = strlen(text);
-    textArray = new char[textLength + 1];
-    strcpy(textArray, text);
+#include "Text.h"
+
+Text::Text(const char* arr){
+    textLength = strlen(arr);
+    textArray = new char[textLength];
 }
 
 Text::~Text(){
-    delete[] textArray;
-    cout << "Text destructor: Released memory for textArray.\n";
-} 
+    delete [] textArray;
+    cout << "Text destructor: Released memory for textArray\n";
+}
 
-void displayText(){
+void Text::displayText(){
     cout << textArray << endl;
 }
 
-const char* getText(){
+const char* Text::getText() const{
     return textArray;
 }
 
-int getLength(){
+int Text:: getLength() const{
     return textLength;
 }

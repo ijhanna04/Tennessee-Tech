@@ -1,46 +1,46 @@
 #include <iostream>
-#include "VideoGame.h"
-#include "Text.h"
-
 using namespace std;
 
-//VideoGame constructor
-VideoGame* createVideoGame(Text* vgTitle, Text* vgDeveloper, Text* vgPublisher, int vgYear){
-    VideoGame* videogame = new VideoGame;
-    videogame->title = vgTitle;
-    videogame->developer = vgDeveloper;
-    videogame->publisher = vgPublisher;
-    videogame->year = vgYear;
+#include "VideoGame.h";
+
+videoGame::videoGame(Text* titleVG, Text* developerVG, Text* publisherVG, int yearVG){
+    title = titleVG;
+    developer = developerVG;
+    publisher = publisherVG;
+    year = yearVG;
 }
 
-//~VideoGame destructor
-void destroyVideoGame(VideoGame* videogame){
+videoGame::~videoGame(){
     delete title;
     delete developer;
     delete publisher;
-    cout << "VideoGame destructor: Released memory for VideoGame object.\n";
+    cout << "VideoGame destructor: Released memory for VideoGame object";
 }
 
-void printVideoGameDetails(){
-    cout << "Game Title: ";
-    title->displayText();
-    cout << "Developer: ";
-    developer->displayText();
+void videoGame::printVideoGameDetails(){
+    cout << "Game Title: "; 
+    title->Text::displayText();
+    cout << "Developer: "; 
+    developer->Text::displayText();
     cout << "Publisher: ";
-    publisher->displayText();
+    publisher->Text::displayText();
     cout << "Year Released: " << year << endl;
+
 }
 
-void printVideoGameDetailsToFile(ofstream& file){
-    cout << "Game Title: ";
-    title->displayText();
-    cout << "Developer: ";
-    developer->displayText();
-    cout << "Publisher: ";
-    publisher->displayText();
-    cout << "Year Released: " << year << endl;
+void videoGame::printVideoGameDetailsToFile(ofstream& file) const{
+    string filename;
+    cout << "What do you want to name the file? (example.txt): ";
+    cin >> filename;
+    ofstream file(filename);
+    if(file.is_open()){
+        file << title->getText() << endl << developer->getText() << endl << publisher->getText() << endl << year << endl;
+    }
+
+    file.close();
+    cout << endl << "All video games in your library have been printed to " << filename << endl << endl;
 }
 
-Text* getVideoGameTitle(){
+Text* videoGame:: getVideoGameTitle() const{
     return title;
 }

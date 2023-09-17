@@ -2,26 +2,26 @@
 #define VIDEOGAMELIBRARY_H
 
 #include <iostream>
-#include <fstream>
-#include "VideoGame.h"
-
 using namespace std;
+
+#include "VideoGame.h"
+#include "Text.h"
 
 class videoGameLibrary{
     public:
-        videoGameLibrary(int);
+        void resizeVideoGameArray();
+        videoGameLibrary();
         ~videoGameLibrary();
         void addVideoGameToArray();
         void displayVideoGames();
         void displayVideoGameTitles();
-        void loadVideoGamesFromFile(char*);
+        void loadVideoGamesFromFile(char* filename);
         void removeVideoGameFromArray();
-        void saveToFile();   
+        void saveToFile(char* filename);
     private:
-        int **videoGamesArray;
+        videoGame** videoGamesArray;
         int maxGames;
         int numGames;
 };
-
 
 #endif

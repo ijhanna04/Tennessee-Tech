@@ -2,21 +2,23 @@
 #define VIDEOGAME_H
 
 #include <iostream>
-#include "Text.h"
-
+#include <fstream>
 using namespace std;
 
-class VideoGame {
-    Text* title;
-    Text* developer;
-    Text* publisher;
-    int year;
-};
+#include "Text.h"
 
-VideoGame* createVideoGame(Text*, Text*, Text*, int);
-void destroyVideoGame(VideoGame* videogame);
-void printVideoGameDetails();
-void printVideoGameDetailsToFile(ofstream&);
-Text* getVideoGameTitle();
+class videoGame{
+    public:
+        videoGame(Text* titleVG, Text* developerVG, Text* publisherVG, int yearVG);
+        ~videoGame();
+        void printVideoGameDetails();
+        void printVideoGameDetailsToFile(ofstream& file) const;
+        Text* getVideoGameTitle() const;
+    private:
+        Text* title;
+        Text* developer;
+        Text* publisher;
+        int year;
+};
 
 #endif
