@@ -1,3 +1,10 @@
+/*
+    Title:      VideoGameLibrary.h
+    Author:     Ian Hanna
+    Date        September 18, 2023
+    Purpose:    Video Game Library Header File
+*/
+
 #ifndef VIDEOGAMELIBRARY_H
 #define VIDEOGAMELIBRARY_H
 
@@ -9,15 +16,16 @@ using namespace std;
 
 class videoGameLibrary{
     public:
+
         void resizeVideoGameArray();
-        videoGameLibrary();
+        videoGameLibrary(int gamesInput);
         ~videoGameLibrary();
         void addVideoGameToArray();
         void displayVideoGames();
         void displayVideoGameTitles();
-        void loadVideoGamesFromFile(char* filename);
+        void loadVideoGamesFromFile(string* filename);
         void removeVideoGameFromArray();
-        void saveToFile(char* filename);
+        void saveToFile(string* filename);
     private:
         videoGame** videoGamesArray;
         int maxGames;

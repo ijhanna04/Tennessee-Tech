@@ -1,3 +1,10 @@
+/*
+    Title:      VideoGame.h
+    Author:     Ian Hanna
+    Date        September 18, 2023
+    Purpose:    Video Game Header File
+*/
+
 #ifndef VIDEOGAME_H
 #define VIDEOGAME_H
 
@@ -12,7 +19,7 @@ class videoGame{
         videoGame(Text* titleVG, Text* developerVG, Text* publisherVG, int yearVG);
         ~videoGame();
         void printVideoGameDetails();
-        void printVideoGameDetailsToFile(ofstream& file) const;
+        void printVideoGameDetailsToFile(ofstream& filename) const;
         Text* getVideoGameTitle() const;
     private:
         Text* title;

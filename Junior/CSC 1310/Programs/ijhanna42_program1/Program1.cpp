@@ -1,25 +1,35 @@
 /*
     Title:      Program1.cpp
     Author:     Ian Hanna
+    Class:      CSC 1310-001
     Date        September 18, 2023
     Purpose:    Video Game Library
 */
 
-#include "Text.h"
-#include "VideoGame.h"
-#include "VideoGameLibrary.h"
 #include <iostream>
 
 using namespace std;
 
+// include necessary header files
+#include "Text.h"
+#include "VideoGame.h"
+#include "VideoGameLibrary.h"
+
 int main(){
     int numGamesHeld = 0;
     int menuChoice = 0;
+    string fileToLoad;
+    string fileToSave;
 
+    // ask the user for the number of games the video game library can hold
     cout << "How many video games can your library hold?\n";
     cin >> numGamesHeld;
 
+    // dynamically allocate a VideoGameLibrary object, sending the number as an argument
+    videoGameLibrary* myLibrary = new videoGameLibrary(numGamesHeld);
+
     do{
+        // display a menu of six choices
         cout << "What would you like to do?\n";
         cout << "1. Load video games from file.\n";
         cout << "2. Save video games to a file.\n";
@@ -30,24 +40,41 @@ int main(){
         cout << "CHOOSE 1-6: ";
         cin >> menuChoice;
 
+        // input check
+        if(menuChoice < 1 || menuChoice > 6){
+            cout << "Invalid menu choice. Choose a number between 1 and 6: ";
+            cin >> menuChoice;
+        }
+
         switch (menuChoice){
             case 1:
-                void loadVideoGamesFromFile();
+                // ask the name of the file
+                cout << "\nWhat is the name of the file? (example.txt): ";
+                cin >> fileToLoad;
+
+                // call loadVideoGamesFromFile, sending the filename as a string
+                myLibrary->loadVideoGamesFromFile(&fileToLoad);
                 break;
             case 2:
-                void saveToFile();
+                // ask the name of the file and call the saveToFile function, sending the filename as a string
+                myLibrary->saveToFile(&fileToSave);
                 break;
             case 3:
-                void addVideoGameToArray();
+                // call the addVideoGameToArray function
+                myLibrary->addVideoGameToArray();
                 break;
             case 4:
-                void removeVideoGameFromArray();
+                // call the removeVideoGameFromArray function
+                myLibrary->removeVideoGameFromArray();
                 break;
             case 5:
-                void displayVideoGames();
+                // call the displayVideoGames function
+                myLibrary->displayVideoGames();
                 break;
             case 6:
-                break;
+                // release the VideoGameLibrary object and end the program
+                myLibrary->~videoGameLibrary();
+                return 0;
         }
     }while (menuChoice != 6);
 
