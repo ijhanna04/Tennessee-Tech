@@ -121,7 +121,7 @@ void videoGameLibrary::displayVideoGameTitles(){
         Text* newTitle = videoGamesArray[i]->getVideoGameTitle();
 
         // --print out the title by calling the Text's displayText function
-        newTitle.displayText();
+        newTitle->displayText();
     }
 }
 
