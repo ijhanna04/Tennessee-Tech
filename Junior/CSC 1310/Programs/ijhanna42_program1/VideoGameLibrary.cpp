@@ -12,6 +12,8 @@ using namespace std;
 
 // include necessary header files
 #include "VideoGameLibrary.h"
+#include "VideoGame.h"
+#include "Text.h"
 
 // resizeVideoGameArray function
 void videoGameLibrary::resizeVideoGameArray(){
@@ -19,24 +21,28 @@ void videoGameLibrary::resizeVideoGameArray(){
     cout << "\nResizing VideoGameArray from " << maxGames << " to " << maxGames*2 << endl;
 
     // make the array twice as big as it currently is
-    maxGames *=2;
-    videoGame**tempArray = new videoGame*[maxGames];
+    videoGame**tempArray = new videoGame*[maxGames*2];
 
     // move all the videoGame pointers to the new array
-    for(int i = 0; i < numGames; i++){
+    for(int i = 0; i < maxGames; i++){
         tempArray[i] = videoGamesArray[i];
     }
+
+    delete[] videoGamesArray;
+    videoGamesArray = tempArray;
+    cout << "Array has been resized from " << maxGames << " to " << maxGames*2 << endl;
+    maxGames = maxGames*2;
 }
 
 // videoGameLibrary constructor
 videoGameLibrary::videoGameLibrary(int gamesInput){
 
     // dynamically allocate an array of pointers to VideoGame objects based on the maximum size
-    maxGames = gamesInput;
+    this->maxGames = gamesInput;
     videoGamesArray = new videoGame*[maxGames];
 
     // set current number of games to 0
-    numGames = 0;
+    this->numGames = 0;
 }
 
 // videoGameLibrary destructor
@@ -55,39 +61,42 @@ videoGameLibrary::~videoGameLibrary(){
 // addVideoGameToArray function
 void videoGameLibrary::addVideoGameToArray(){
 
-    char title[10000];
-    char developer[10000];
-    char publisher[10000];
-    int releaseYear;
+    char temp[10000];
+    Text *newTitle, *newDeveloper, *newPublisher;
+    int newYear;
+
+    cin.ignore();
 
     // ask the user for the video game title
-    cout << "\n\nVideo Game TITLE: ";
+    cout << "\nVideo Game TITLE: ";
     //read input as a c-string
-    cin.getline(title, 10000);
+    cin.getline(temp, 10000);
     //dynamically create a Text object
-    Text* titleText = new Text(title);
+    newTitle = new Text(temp);
 
     // ask the user for the video game developer
-    cout << "\n\nVideo Game DEVELOPER: ";
+    cout << "\nVideo Game DEVELOPER: ";
     //read input as a c-string
-    cin.getline(developer, 10000);
+    cin.getline(temp, 10000);
     //dynamically create a Text object
-    Text* developerText = new Text(developer);
+    newDeveloper = new Text(temp);
 
     // ask the user for the video game publisher
-    cout << "\n\nVideo Game PUBLISHER: ";
+    cout << "\nVideo Game PUBLISHER: ";
     //read input as a c-string
-    cin.getline(publisher, 10000);
+    cin.getline(temp, 10000);
     //dynamically create a Text object
-    Text* publisherText = new Text(publisher);
+    newPublisher = new Text(temp);
 
+    //fixme
     // ask user for video game release year
-    cout << "\n\nVideo Game YEAR: ";
+    cout << "\nVideo Game YEAR: ";
     // read input as an integer
-    cin >> releaseYear;
+    cin >> newYear;
+    cin.ignore();
 
-    // --send the given data as arguments to the VideoGame constructor
-    videoGame* game = new videoGame(titleText, developerText, publisherText, releaseYear);
+    // send the given data as arguments to the VideoGame constructor
+    videoGame* newGame = new videoGame(newTitle, newDeveloper, newPublisher, newYear);
 
     // check if numGames is equal to maxGames
     if (numGames == maxGames){
@@ -96,7 +105,7 @@ void videoGameLibrary::addVideoGameToArray(){
     }
 
     // assign the new video game to the correct pointer in the videoGamesArray
-    videoGamesArray[numGames] = game;
+    videoGamesArray[numGames] = newGame;
 
     // increment numGames
     numGames++;
@@ -108,6 +117,7 @@ void videoGameLibrary::displayVideoGames(){
     // loop through the videoGamesArray
     for(int i = 0; i < numGames; i++){
         // call each video game's printVideoGameDetails function
+        cout << "               ---------- Video Game " << i+1 << " ----------\n";
         videoGamesArray[i]->videoGame::printVideoGameDetails();
     }
 }
@@ -117,45 +127,50 @@ void videoGameLibrary::displayVideoGameTitles(){
 
     // loop through the videoGamesArray
     for(int i = 0; i < numGames; i++){
-        // retrieve the video game's title by calling the video game's getVideoGameTitle function
-        Text* newTitle = videoGamesArray[i]->getVideoGameTitle();
 
-        // --print out the title by calling the Text's displayText function
-        newTitle->displayText();
+        cout << i+1 << ": ";
+        // retrieve the video game's title by calling the video game's getVideoGameTitle function
+        videoGamesArray[i]->getVideoGameTitle();
+
+        // print out the title
+        cout << endl;
     }
 }
 
 // loadVideoGamesFromFile function
-void videoGameLibrary::loadVideoGamesFromFile(string* filename){
-    
-    ifstream file(*filename);
+void videoGameLibrary::loadVideoGamesFromFile(string filename){
 
-    if(file.is_open()){
+    Text *gameTitle, *gameDeveloper, *gamePublisher;
+    int yearReleased;
+    char temp[10000];
+    int numGamesAdded;
+    ifstream infile;
+
+    infile.open(filename.c_str());
+
+    if(infile.good()) {
 
         // use a loop to read the contents of the file until reaching the end of file
-        while(!file.eof()){
+        while(!infile.eof()){
 
             // read in the title with a c-string
-            char* title = new char[10000];
-            file.getline(title, 10000);
+            infile.getline(temp, 10000);
             // dynamically allocate a Text to hold the title
-            Text* gameTitle = new Text(title);
+            gameTitle = new Text(temp);
 
             // read in the developer with a c-string
-            char* developer = new char[10000];
-            file.getline(developer, 10000);
+            infile.getline(temp, 10000);
             // dynamically allocate a Text to hold the developer
-            Text* gameDeveloper = new Text(developer);
+            gameDeveloper = new Text(temp);
 
             // read in the publisher with a c-string
-            char* publisher = new char[10000];
-            file.getline(publisher, 10000);
+            infile.getline(temp, 10000);
             // dynamically allocate a Text to hold the publisher
-            Text* gamePublisher = new Text(publisher);
+            gamePublisher = new Text(temp);
 
             //read in the year released
-            int yearReleased;
-            file >> yearReleased;
+            infile >> yearReleased;
+            infile.ignore();
 
             // dynamically allocate a new videoGame object, sending the data from the file as arguments to the videoGame constructor
             videoGame* gameLoad = new videoGame(gameTitle, gameDeveloper, gamePublisher, yearReleased);
@@ -166,28 +181,33 @@ void videoGameLibrary::loadVideoGamesFromFile(string* filename){
                 videoGameLibrary::resizeVideoGameArray();
             }
 
-            // --assign the new video game to te correct pointer in the videoGamesArray
+            // assign the new video game to te correct pointer in the videoGamesArray
             videoGamesArray[numGames] = gameLoad;
 
             // increment numGames
             numGames++;
+            numGamesAdded++;
 
             // print that the new video game has been added successfully
-            cout << gameTitle << " was added successfully\n";
+            gameTitle->displayText();
+            cout << " was added successfully\n";
         }
+    }else {
+        cout << "\nSorry, I was unable to open the file.\n\n";
+    }
+
+        infile.close();
 
         // print out how many video games were read from the file and added th the library
-        cout << numGames << " were read from the file and added to your VideoGame library.";
-        file.close();
-
-    } else {
-        cout << "Sorry, I was unable to open the file.\n\n";
-    }
-    
+        cout << numGamesAdded << " were read from the file and added to your VideoGame library.";
 }   
 
 // removeVideoGameFromArray function
 void videoGameLibrary::removeVideoGameFromArray(){
+
+    int choice;
+    Text* removeTitle, *removeDeveloper, *removePublisher;
+    int removeYear;
 
     // if numGames is not at least one, print that there should always be one game in the library and end the function
     if(numGames < 1){
@@ -201,9 +221,7 @@ void videoGameLibrary::removeVideoGameFromArray(){
 
     // ask the user to choose a video game to remove between 1 and numGames
     cout << "Choose a video game to remove between 1 & " << numGames << ":";
-    int choice;
     cin >> choice;
-
     // input check
     if(choice < 1 || choice > numGames){
         cout << "Invalid choice. Enter a number between 1 and " << numGames << ":";
@@ -211,14 +229,11 @@ void videoGameLibrary::removeVideoGameFromArray(){
     }
 
     // print that the video game title has been successfully deleted
-    cout << videoGamesArray[choice - 1]->videoGame::getVideoGameTitle() << " has been successfully deleted.\n\n";
+    videoGamesArray[choice - 1]->getVideoGameTitle();
+    cout << " has been successfully deleted.\n";
 
-    // release the dynamically allocated space for the video game
-    delete videoGamesArray[choice - 1];
-    cout << "VideoGame destructor: Released memory for VideoGame object";
-
-    // move all array elements in the videoGamesArray back 1, starting with the deleted video game's element
-    for(int i = choice - 1; i < numGames; ++i){
+    // release the dynamically allocated space for the video game and move all array elements in the videoGamesArray back 1, starting with the deleted video game's element
+    for(int i = choice - 1; i < numGames-1; ++i){
         videoGamesArray[i] = videoGamesArray[i + 1];
     }
 
@@ -227,19 +242,25 @@ void videoGameLibrary::removeVideoGameFromArray(){
 }
 
 // saveToFile function
-void videoGameLibrary::saveToFile(string* filename){
-    ofstream file(*filename);
-    if (file.is_open()){
-        // loop through the videoGamesArray
-        for(int i = 0; i < numGames; i++){
-            // call the printVideoGameDetailsToFile, sending the file stream object to be printed to
-            videoGamesArray[i]->videoGame::printVideoGameDetailsToFile(file);
-        }
+void videoGameLibrary::saveToFile(string filename){
 
-        // close the file
-        file.close();
+    ofstream file;
 
-        // print a confirmation that all video games have been printed to the filename
-        cout << "All video games in your library have been printed to " << filename << endl << endl;
+    file.open(filename.c_str());
+
+    if (!file.is_open()){
+        cout << "\nError opening file " << filename << endl;
     }
+
+    // loop through the videoGamesArray
+    for(int i = 0; i < numGames; i++){
+        // call the printVideoGameDetailsToFile, sending the file stream object to be printed to
+        videoGamesArray[i]->printVideoGameDetailsToFile(file);
+    }
+
+    // close the file
+    file.close();
+
+    // print a confirmation that all video games have been printed to the filename
+    cout << "All video games in your library have been printed to " << filename << endl << endl;  
 }

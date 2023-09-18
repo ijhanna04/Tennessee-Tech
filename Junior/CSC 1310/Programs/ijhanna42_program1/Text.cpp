@@ -14,17 +14,17 @@ using namespace std;
 #include "Text.h"
 
 // Text constructor
-Text::Text(const char* const arr){
+Text::Text(const char* arr){
 
     // dynamically allocate a new character string the size of the string passed to the function
     textLength = strlen(arr);
-
-    // set the textArray attribute to the newly created c-string
-    textArray = new char[textLength];
+    char* tempArr = new char[textLength+1];
 
     // copy the text sent as an argument to the constructor to the new dynamically allocated string using strcpy
-    strcpy(textArray, arr);
+    strcpy(tempArr, arr);
 
+    // set the textArray attribute to the newly created c-string
+    textArray = tempArr;
 }
 
 // Text destructor
@@ -41,7 +41,7 @@ Text::~Text(){
 void Text::displayText(){
 
     // print the c-string(textArray) to the screen
-    cout << textArray << endl;
+    cout << textArray;
 }
 
 // getText accessor function
@@ -52,7 +52,7 @@ const char* Text::getText() const{
 }
 
 // getLength accessor function
-int Text:: getLength() const{
+int Text::getLength() const{
 
     // return the length of the string
     return textLength;

@@ -6,6 +6,8 @@
 */
 
 #include <iostream>
+#include <fstream>
+#include <cstring>
 using namespace std;
 
 // include necessary header files
@@ -15,10 +17,10 @@ using namespace std;
 videoGame::videoGame(Text* titleVG, Text* developerVG, Text* publisherVG, int yearVG){
 
     // initialize all attributes to the arguments sent to the function
-    title = titleVG;
-    developer = developerVG;
-    publisher = publisherVG;
-    year = yearVG;
+    this->title = titleVG;
+    this->developer = developerVG;
+    this->publisher = publisherVG;
+    this->year = yearVG;
 }
 
 // videoGame destructor
@@ -37,28 +39,36 @@ videoGame::~videoGame(){
 void videoGame::printVideoGameDetails(){
 
     // print the title, developer, publisher, and year
-    cout << "Game Title: "; 
-    title->Text::displayText();
-    cout << "Developer: "; 
-    developer->Text::displayText();
-    cout << "Publisher: ";
-    publisher->Text::displayText();
-    cout << "Year Released: " << year << endl;
+    cout << "       Game Title: "; 
+    title->displayText();
+    cout << endl;
+    cout << "       Developer: "; 
+    developer->displayText();
+    cout << endl;
+    cout << "       Publisher: ";
+    publisher->displayText();
+    cout << endl;
+    cout << "       Year Released: " << year << endl;
 
 }
 
 // printVideoGameDetailsToFile function
-void videoGame::printVideoGameDetailsToFile(ofstream& filename) const{
+void videoGame::printVideoGameDetailsToFile(ofstream& filename){
 
+    char temp[10000];
     // print the title, developer, publisher, and year to the filestream object sent to the function
-    filename << title->getText() << endl << developer->getText() << endl << publisher->getText() << endl << year << endl;
-
-    cout << endl << "All video games in your library have been printed to " << &filename << endl << endl;
+    strncpy(temp, title->getText(), 10000);
+    filename << temp << endl;
+    strncpy(temp, developer->getText(), 10000);
+    filename << temp << endl;
+    strncpy(temp, publisher->getText(), 10000);
+    filename << temp << endl;
+    filename << year << endl;
 }
 
 // getVideoGameTitle accessor function
-Text* videoGame:: getVideoGameTitle() const{
+void videoGame::getVideoGameTitle() const{
 
     // return a pointer to the Text object containing the video game title
-    return title;
+    title->displayText();
 }

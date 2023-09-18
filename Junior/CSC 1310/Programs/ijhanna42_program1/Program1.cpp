@@ -7,6 +7,7 @@
 */
 
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -16,21 +17,26 @@ using namespace std;
 #include "VideoGameLibrary.h"
 
 int main(){
-    int numGamesHeld = 0;
-    int menuChoice = 0;
-    string fileToLoad;
-    string fileToSave;
+    int numGamesHeld;
+    int menuChoice;
+    string file;
+    ifstream infile;
+
 
     // ask the user for the number of games the video game library can hold
     cout << "How many video games can your library hold?\n";
     cin >> numGamesHeld;
+    while(numGamesHeld < 0){
+        cout << "\nInvalid menu choice. Enter a number greater than 0\n";
+        cin >> numGamesHeld;
+    }
 
     // dynamically allocate a VideoGameLibrary object, sending the number as an argument
     videoGameLibrary* myLibrary = new videoGameLibrary(numGamesHeld);
 
     do{
         // display a menu of six choices
-        cout << "What would you like to do?\n";
+        cout << "\n\nWhat would you like to do?\n";
         cout << "1. Load video games from file.\n";
         cout << "2. Save video games to a file.\n";
         cout << "3. Add a video game.\n";
@@ -50,14 +56,19 @@ int main(){
             case 1:
                 // ask the name of the file
                 cout << "\nWhat is the name of the file? (example.txt): ";
-                cin >> fileToLoad;
+                cin >> file;
 
                 // call loadVideoGamesFromFile, sending the filename as a string
-                myLibrary->loadVideoGamesFromFile(&fileToLoad);
+                myLibrary->loadVideoGamesFromFile(file);
                 break;
             case 2:
-                // ask the name of the file and call the saveToFile function, sending the filename as a string
-                myLibrary->saveToFile(&fileToSave);
+                // ask the name of the file
+                cout << "\nWhat do you want to name the file? (example.txt): ";
+                cin >> file;
+
+                // call the saveToFile function, sending the filename as a string
+                myLibrary->saveToFile(file);
+                cout << "\nAll video games in your library have been printed to " << file << endl;
                 break;
             case 3:
                 // call the addVideoGameToArray function
@@ -73,10 +84,13 @@ int main(){
                 break;
             case 6:
                 // release the VideoGameLibrary object and end the program
-                myLibrary->~videoGameLibrary();
-                return 0;
+                delete myLibrary;
         }
     }while (menuChoice != 6);
+
+    cout << "\nGoodbye!\n";
+
+    infile.close();
 
     return 0;
 }

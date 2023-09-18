@@ -11,15 +11,16 @@
 #include <iostream>
 using namespace std;
 
+// Text class definition
 class Text{
     public:
-        Text(const char* const arr);
-        ~Text();
+        Text(const char* arr);  // Text constructor
+        ~Text();    // Text destructor
         void displayText();
-        const char* getText() const;
-        int getLength() const;
+        const char* getText() const;    // accessor function
+        int getLength() const;  // accessor function
     private:
-        char* textArray;  
+        const char* textArray;  
         int textLength;
 };
 

@@ -10,17 +10,23 @@
 
 #include <iostream>
 #include <fstream>
+
 using namespace std;
 
+// include necessary header files
 #include "Text.h"
 
+// videoGame class definition
 class videoGame{
     public:
-        videoGame(Text* titleVG, Text* developerVG, Text* publisherVG, int yearVG);
-        ~videoGame();
+        videoGame(){    // default constructor for videoGame
+
+        };
+        videoGame(Text* titleVG, Text* developerVG, Text* publisherVG, int yearVG); // videoGame constructor
+        ~videoGame();   // videoGame destructor
         void printVideoGameDetails();
-        void printVideoGameDetailsToFile(ofstream& filename) const;
-        Text* getVideoGameTitle() const;
+        void printVideoGameDetailsToFile(ofstream &filename);
+        void getVideoGameTitle() const; // accessor function
     private:
         Text* title;
         Text* developer;

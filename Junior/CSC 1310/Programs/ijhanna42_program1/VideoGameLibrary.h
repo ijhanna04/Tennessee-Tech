@@ -11,21 +11,22 @@
 #include <iostream>
 using namespace std;
 
+// include necessary header files
 #include "VideoGame.h"
 #include "Text.h"
 
+// videoGameLibrary class definition
 class videoGameLibrary{
     public:
-
         void resizeVideoGameArray();
-        videoGameLibrary(int gamesInput);
-        ~videoGameLibrary();
+        videoGameLibrary(int);  // videoGame constructor
+        ~videoGameLibrary();    // videoGame destructor
         void addVideoGameToArray();
         void displayVideoGames();
         void displayVideoGameTitles();
-        void loadVideoGamesFromFile(string* filename);
+        void loadVideoGamesFromFile(string);
         void removeVideoGameFromArray();
-        void saveToFile(string* filename);
+        void saveToFile(string);
     private:
         videoGame** videoGamesArray;
         int maxGames;
