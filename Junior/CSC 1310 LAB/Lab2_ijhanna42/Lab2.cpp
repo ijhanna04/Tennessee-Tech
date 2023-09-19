@@ -145,11 +145,11 @@ int main()
 //implement the five recursive functions below!!!!
 
 // Sum Of Numbers Recursive Function
-int sumOfNumbers(int n) {
-    if (n == 1) {
+int sumOfNumbers(int num) {
+    if (num == 1) {
         return 1;
     } else {
-        return n + sumOfNumbers(n - 1);
+        return num + sumOfNumbers(num - 1);
     }
 }
 
