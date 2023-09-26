@@ -49,6 +49,7 @@ int main()
 	start = getTime(); //Starts timer.   
 
 	//LOOK!!!!  CALL THE INSERTION SORT ALGORITHM HERE
+	insertionSort(wordArray, numWords);
 
 	end = getTime(); //Ends timer.
 	outfile.open("sortFileInsertion.txt");
@@ -63,6 +64,7 @@ int main()
 	start = getTime(); //Starts timer. 
 
 	//LOOK!!!!  CALL THE REVERSE BUBBLE SORT ALGORITHM HERE
+	bubbleSortReverse(wordArray, numWords);
 
 	end = getTime(); //Ends timer.
 	outfile.open("sortFileReverseBubble.txt");
@@ -77,6 +79,9 @@ int main()
 	start = getTime(); //Starts timer. 
 	
 	//LOOK!!!!  CALL THE QUICKSORT ALGORITHM HERE
+	int low = 0;
+	int high = numWords - 1;
+	quickSort(wordArray, low, high);
 
 	end = getTime(); //Ends timer.
 	cout << "\nQuicksort: " << totalTime(start, end) << " seconds\n\n";
@@ -92,16 +97,60 @@ int main()
 }
 
 //LOOK!  WRITE YOUR INSERTION SORT FUNCTION HERE
-void insertionSort(wordCount *arrWord, int wordNum);
+void insertionSort(wordCount *arrWord, int wordNum){
+	int i, key, j;
+	for (i = 1; i < wordNum; i++){
+		key = arrWord[i].count;
+		j = i-1;
 
+		while (j >= 0 && arrWord[j].count > key){
+			arrWord[j+1] = arrWord[j];
+			j = j-1;
+		}
+
+		arrWord[j+1].count = key;
+	}
+}
 
 //LOOK!  WRITE YOUR REVERSE BUBBLE SORT FUNCTION HERE
-void bubbleSortReverse(wordCount* *arrWord, int wordNum);
-
+void bubbleSortReverse(wordCount *arrWord, int wordNum){
+    for(int i = 0; i < wordNum-1; i++) {
+        for(int j = 0; j < wordNum-i-1; j++) {
+            if(arrWord[j].count < arrWord[j+1].count) {
+                int temp = arrWord[j].count;
+                arrWord[j] = arrWord[j+1];
+                arrWord[j+1].count = temp;
+            }
+        }
+    }
+}
 
 //LOOK!  WRITE YOUR RECURSIVE QUICK SORT FUNCTION HERE
-void quickSort(wordCount *arrWord, int wordNum);
+void quickSort(wordCount *arrWord, int lowNum, int highNum){
+    if (lowNum < highNum){
+        int pi = partition(arrWord, lowNum, highNum);
+        quickSort(arrWord, lowNum, pi - 1);
+        quickSort(arrWord, pi + 1, highNum);
+    }
+}
 
+void swap(wordCount* a, wordCount* b) {
+    wordCount t = *a;
+    *a = *b;
+    *b = t;
+}
 
 //LOOK!  WRITE YOUR PARTITION FUNCTION HERE
-int partition(wordCount *arrWord, int leftNum, int rightNum);
+int partition(wordCount *arrWord, int leftNum, int rightNum){
+	int pivot = arrWord[rightNum].count;
+    int i = (leftNum - 1);
+
+    for (int j = leftNum; j <= rightNum - 1; j++){
+        if (arrWord[j].count <= pivot){
+            i++;
+            swap(&arrWord[i], &arrWord[j]);
+        }
+    }
+    swap(&arrWord[i + 1], &arrWord[rightNum]);
+    return (i + 1);
+}
