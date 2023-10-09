@@ -63,9 +63,16 @@ class List{
 
     // mergeSort function
     void mergeSort() {
+
         // call the private mergesort function, passing head and tail as arguments
-        mergesort(head, tail);
-        //fixme
+        head = mergesort(head, tail);
+
+        // traverse list to find where the new tail is
+        listNode* current = head;
+        while (current->next != nullptr){
+            current = current->next;
+        }
+        tail = current;
     }
 
     private:
@@ -83,14 +90,19 @@ class List{
         }
 
         // private mergesort function
-        //fixme comments
         typename List<T>::listNode* mergesort(listNode* first, listNode* last){
+
+            // base case returns first parameter
             if (first == nullptr || first == last){
                 return first;
             }
+
+            // make node references for a placeholder, passing lower and upper bound of list partitions and sending the data to placeholder nodes
             listNode* mid = split(first, last);
             listNode* left = mergesort(first, mid);
             listNode* right = mergesort(mid, last);
+
+            // merge and return the node that's passed from the merge function
             return merge(left, right);
         }
         
@@ -143,7 +155,7 @@ class List{
 
             // set middle's next pointer to null
             middle->next = nullptr;
-            
+
             return middle;
         }
 };
