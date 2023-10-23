@@ -9,6 +9,9 @@ int menu();
 int main()
 {
 	//make 2 queues, a normal and instant queue---------------------------------------------------------------
+	Queue* normalQueue = new Queue;
+	Queue* instantQueue = new Queue;
+
 	int choice, passChoice;
 	string name;
 	
@@ -33,20 +36,26 @@ int main()
 						cin.ignore();
 						
 						if(passChoice == 1)
+						{
 							//add name to the normal queue--------------------------------------------------
-						else
+							normalQueue->enqueue(name);
+						}
+						else {
 							//add name to the instant queue-------------------------------------------------
-							
+							instantQueue->enqueue(name);
+						}
 						break;
 						
-			case 2:		if() //check if there's anyone in the instant queue---------------------------------------------
+			case 2:		if(!instantQueue->isEmpty()) //check if there's anyone in the instant queue---------------------------------------------
 						{
 							//remove the front of the instant queue-----------------------------------------
+							instantQueue->dequeue();
 							cout << "\t\t" << name << ", InstantPass holder, YOU ARE RIDING!\n";
 						}
-						else if() //check if there's anyone in the normal queue---------------------------------
+						else if(!normalQueue->isEmpty()) //check if there's anyone in the normal queue---------------------------------
 						{
 							//remove the front of the normal queue------------------------------------------
+							normalQueue->dequeue();
 							cout << "\t\t" << name << ", normal pass holder, YOU ARE RIDING!\n";
 						}
 						else
