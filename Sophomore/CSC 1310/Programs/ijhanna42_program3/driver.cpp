@@ -2,7 +2,7 @@
 #include <fstream>
 #include "sha256.h"
 //include your hash table---------------------------------------------------------------------------------------------------
-
+#include "hashTable.h"
 using namespace std;
 
 int main()
@@ -13,16 +13,23 @@ int main()
 	int numUsers;
 	string user, pwd, salt;
 	string username, password;
+
+	hashTable* newTable = nullptr;
 	
 	if(file.is_open()) {
 	file >> numUsers;
 	file.ignore(1, '\n');
+
 	//dynamically allocate your hash table-------------------------------------------------------------------------------
-	
+	newTable = new hashTable(numUsers);
+
 	while(getline(file, user))
 	{
 		getline(file, pwd);
+
 		//generate a salt and add the new user to your table--------------------------------------------------------
+		string newSalt = newTable->generateSalt();
+		newTable->addEntry(user, sha256(pwd), newSalt);
 	}}
 	
 	do
@@ -48,7 +55,7 @@ int main()
 					cout << "enter your password:  ";
 					cin >> password;
 					
-					if()//check if the user's credentials are correct-----------------------------------
+					if(newTable->validateLogin(username, sha256(password)))//check if the user's credentials are correct-----------------------------------
 						cout << "login successful\n";
 					else
 						cout << "invalid credentials\n";
@@ -61,7 +68,8 @@ int main()
 					cin >> password;
 					
 					//generate a salt for the new user and add the user to the table--------------------
-					
+					newTable->addEntry(user, sha256(pwd), newTable->generateSalt());
+
 					break;
 					
 			case 3:	cout << "enter your username:  ";
@@ -69,7 +77,7 @@ int main()
 					cout << "enter your password:  ";
 					cin >> password;
 					
-					if()//remove the user from the table and check if they were removed successfully----
+					if(newTable->removeUser(username, sha256(password)))//remove the user from the table and check if they were removed successfully----
 						cout << "user removed successfully.\n";
 					else
 						cout << "invalid credentials, cannot remove user.\n";
@@ -77,6 +85,8 @@ int main()
 					
 			case 4:	cout << "goodbye" << endl;
 					//delete the hash table-------------------------------------------------------------
+					delete newTable;
+
 					break;
 					
 		}

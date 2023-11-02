@@ -8,12 +8,33 @@ class hashTable
 	private:
 		class entry;
 
-		//add the attributes you need for the class---------------------------------------------------------
+			//add the attributes you need for the class---------------------------------------------------------
+			int tableSize;
+			entry** hashArray;
 
-		int hash(string);
+			int hash(string);
+
+			entry* getEntry(string);
+
+
 	public:
 		//add all the functions you need--------------------------------------------------------------------
+		hashTable(int);
+
+		~hashTable();
+
 		string generateSalt();
+
+		string getSalt(string);
+
+		void addEntry(string, string, string);
+
+		bool validateLogin(string, string);
+
+		bool removeUser(string, string);
+
+		class entry;
+
 };
 
 class hashTable::entry
@@ -26,7 +47,13 @@ class hashTable::entry
 		entry* next;
 
 		//add the constructor and getter functions-----------------------------------------------------------
+		entry(string, string, string);
 
+		string getUsername();
+
+		string getSalt();
+
+		string getHashedpwd();
 };
 
 #endif
