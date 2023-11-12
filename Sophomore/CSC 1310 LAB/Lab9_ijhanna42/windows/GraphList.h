@@ -45,7 +45,7 @@ class GraphList {
 
         // printGraph function
         void printGraph() {
-            cout << "Adjacency List..." << endl;
+            cout << endl << "Adjacency List..." << endl;
             for (int i = 0; i < numVertices; i++) {
                 ListNode* current = headArray[i];
                 cout << i << "--->";

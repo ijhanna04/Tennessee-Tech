@@ -13,8 +13,8 @@ int main() {
 
     // read the number of vertices
     file >> numVertices;
-    cout << "There are " << numVertices << " vertices in the graph." << endl;
-    
+    cout << "There are " << numVertices << " vertices in the graph." << endl << endl;
+
     // create adjacency list object based on the number of vertices
     GraphList graph(numVertices);
 
