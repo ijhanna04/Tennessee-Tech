@@ -1,24 +1,23 @@
 #include "Creature.h"
-#include "CreatureBinaryTree.h"
 #include "ArrayMiniHeap.h"
 #include <cctype>
 #include <iostream>
 #include <fstream>
 using namespace std;
 
-void enterMagicalCreature(CreatureBinaryTree*);
-void enterMagicalCreatureFromFile(CreatureBinaryTree*);
-void deleteCreature(CreatureBinaryTree*);
-void printCreatures(CreatureBinaryTree*);
-void saveCreaturesToFile(CreatureBinaryTree*);
+void enterMagicalCreature(ArrayMiniHeap*);
+void enterMagicalCreatureFromFile(ArrayMiniHeap*);
+void deleteCreature(ArrayMiniHeap*);
+void printCreatures(ArrayMiniHeap*);
+void saveCreaturesToFile(ArrayMiniHeap*);
 
 int main()
 {
 	int choice;
 	char response;
-	
-	CreatureBinaryTree creatureTree;
-	ArrayMinHeap creatureHeap(100);
+
+	ArrayMiniHeap creatureHeap(100);
+	Creature creatureRemoved;
 		
 	do{
 	
@@ -26,8 +25,8 @@ int main()
 		cout << "\t1.  Enter Magical Creature\n";
 		cout << "\t2.  List/Print Creatures.\n";
 		cout << "\t3.  Remove Next Creature.\n";	// add option to remove next creature
-		cout << "\t3.  End Program.\n";
-		cout << "\tEnter 1, 2, or 3.\n";
+		cout << "\t4.  End Program.\n";
+		cout << "\tEnter 1, 2, 3, or 4.\n";
 		cout << "CHOICE:  ";
 		cin >> choice;
 		
@@ -56,21 +55,27 @@ int main()
 						cin >> enterChoice;
 					}
 					if(enterChoice == 1)
-						enterMagicalCreature(&creatureTree);	
+						enterMagicalCreature(&creatureHeap);	
 					else
-						enterMagicalCreatureFromFile(&creatureTree);
+						enterMagicalCreatureFromFile(&creatureHeap);
 					break;
 					
-			case 2: printCreatures(&creatureTree);
+			case 2: printCreatures(&creatureHeap);
 					break;
 
-			case 3: creatureHeap.remove();
+			case 3: 
+					bool isRemoved = creatureHeap.remove(creatureRemoved);
+					if (isRemoved){
+						cout << "\nYou have removed " << creatureRemoved.getName() << "\n";
+					} else {
+						cout << "\nNo creature was removed." << endl;
+					}
 					break;
 					
 			case 4: cout << "\nWould you like to save your creature list to a file? (y or n)  ";
 					cin >> response;
 					if(tolower(response) == 'y')
-						saveCreaturesToFile(&creatureTree);
+						saveCreaturesToFile(&creatureHeap);
 					cout << "\n\nGOODBYE!\n";
 					
 		} //end of switch
@@ -80,7 +85,7 @@ int main()
 	return 0;
 } //end of main
 
-void enterMagicalCreature(CreatureBinaryTree *creatureTree)
+void enterMagicalCreature(ArrayMiniHeap *creatureHeap)
 {
 	string name, desc;
 	float cost;
@@ -110,7 +115,7 @@ void enterMagicalCreature(CreatureBinaryTree *creatureTree)
 		Creature newCreature(name, desc, dangerous, cost); 
 		
 		//insert creature in the tree
-		creatureTree->insertNode(newCreature);
+		creatureHeap->insert(newCreature);
 
 		cout << "\n\nWant to add more creatures? (y or n)  ";
 		cin >> response;
@@ -118,7 +123,7 @@ void enterMagicalCreature(CreatureBinaryTree *creatureTree)
 	}while(tolower(response) == 'y');	
 }
 
-void enterMagicalCreatureFromFile(CreatureBinaryTree *creatureTree)
+void enterMagicalCreatureFromFile(ArrayMiniHeap *creatureHeap)
 {
 	ifstream inputFile;
 	char filename[100];
@@ -157,7 +162,7 @@ void enterMagicalCreatureFromFile(CreatureBinaryTree *creatureTree)
 			Creature newCreature(name, desc, dangerous, cost); 
 
 			//insert creature in the tree
-			creatureTree->insertNode(newCreature);
+			creatureHeap->insert(newCreature);
 			
 			numCreatures++;
 			//start reading next line with new creature.						
@@ -173,17 +178,17 @@ void enterMagicalCreatureFromFile(CreatureBinaryTree *creatureTree)
 	}
 }
 
-void printCreatures(CreatureBinaryTree *creatureTree)
+void printCreatures(ArrayMiniHeap *creatureHeap)
 {
-	creatureTree->fullDisplayInOrder();
+	creatureHeap->display();
 }
 
-void saveCreaturesToFile(CreatureBinaryTree *creatureTree)
+void saveCreaturesToFile(ArrayMiniHeap *creatureHeap)
 {
 	string filename;
 	Creature tempCreature;
 	
-	if(creatureTree->getNumNodes() == 0)
+	if(creatureHeap->getNumberOfNodes() == 0)
 	{
 		cout << "------------------------------------------------------------------------" << endl;
 		cout << "THERE ARE NO CREATURES AT YOUR ZOO!\n";
@@ -191,6 +196,6 @@ void saveCreaturesToFile(CreatureBinaryTree *creatureTree)
 	}
 	else
 	{
-		creatureTree->saveToFile();
+		creatureHeap->saveToFile();
 	}
 }
