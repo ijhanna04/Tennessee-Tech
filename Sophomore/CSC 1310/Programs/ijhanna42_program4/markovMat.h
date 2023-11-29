@@ -15,6 +15,7 @@ class markovMat
 			map<string, int> buckets;
 		};
 		matrix corpus;
+		int corpusSize;
 	public:
 		markovMat(const char*);
 		~markovMat();
@@ -44,6 +45,7 @@ markovMat::markovMat(const char* filename)
 		parser[i] << line;
 		getline(parser[i], word,',');
 		//assign an index number to the map for the current word
+		corpus.buckets[word] = 0;
 		i++;
 	}
 	for(i = 0; i < corpusSize; i++) //populate matrix using buffer array
@@ -54,6 +56,7 @@ markovMat::markovMat(const char* filename)
 			splitter.str(word);
 			splitter >> word >> weight;
 			//add weight into the matrix, with the first index as the starting node and the second index at the destination node
+			corpus.buckets[parser[i].str()] = weight;
 		}
 	}}
 }
@@ -61,6 +64,7 @@ markovMat::markovMat(const char* filename)
 markovMat::~markovMat()
 {
 //write this
+
 }
 
 string markovMat::generate(int length)
@@ -69,6 +73,25 @@ string markovMat::generate(int length)
 	map<string, int>::iterator it = corpus.buckets.begin();		//initialize an iterator to find a random node in the next line
 	advance(it,rand() % corpusSize);	//this grabs a random node from your corpus as a starting point
 //you'll need to write the rest of this
+    string current_word = it->first;
+    string output = current_word;
+
+    for (int i = 0; i < length; i++) {
+        float rand_num = (float)rand() / RAND_MAX;
+        float sum = 0;
+        map<string, int>::iterator it2 = corpus.buckets.begin();
+        while (it2 != corpus.buckets.end()) {
+            sum += it2->second;
+            if (rand_num < sum) {
+                current_word = it2->first;
+                output += " " + current_word;
+                break;
+            }
+            it2++;
+        }
+    }
+
+    return output;
 }
 
 #endif
