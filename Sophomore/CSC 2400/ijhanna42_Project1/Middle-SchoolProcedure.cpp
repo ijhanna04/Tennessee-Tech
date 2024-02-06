@@ -1,47 +1,31 @@
 #include <iostream>
-#include <vector>
-
 using namespace std;
 
-vector<int> primeFactorization(int n) {
-    vector<int> factors;
-    for (int i = 2; i * i <= n; i++) {
-        while (n % i == 0) {
-            factors.push_back(i);
-            n = n / i;
-        }
+int main() {
+    int a, b, i, gcd;
+
+    // get integers from user
+    cout << "Enter two integers: ";
+    cin >> a >> b;
+
+    // Find the smaller of the two numbers
+    if (a < b) {
+        gcd = a;
+    } else {
+        gcd = b;
     }
-    if (n > 1)
-        factors.push_back(n);
 
-    return factors;
-}
-
-int middleSchoolProcedure(int a, int b) {
-    vector<int> factorsA = primeFactorization(a);
-    vector<int> factorsB = primeFactorization(b);
-
-    int gcd = 1;
-    for (int i = 0; i < factorsA.size(); i++) {
-        for (int j = 0; j < factorsB.size(); j++) {
-            if (factorsA[i] == factorsB[j]) {
-                gcd *= factorsA[i];
-                factorsB.erase(factorsB.begin() + j);
-                break;
-            }
+    // Find the gcd
+    for (i = 1; i <= gcd; i++) {
+        // check if both numbers are divisible by i
+        if (a % i == 0 && b % i == 0) {
+            // if they are divisible by i, set gcd to i
+            gcd = i;
         }
     }
 
-    return gcd;
-}
-
-int main(int argc, char* argv[]) {
-    int a = stoi(argv[1]);
-    int b = stoi(argv[2]);
-
-    int gcd = middleSchoolProcedure(a, b);
-
-    cout << "gcd(" << a << ", " << b << ") = " << gcd << endl;
+    // print the gcd
+    cout << "The greatest common divisor of " << a << " and " << b << " is " << gcd << endl;
 
     return 0;
 }
