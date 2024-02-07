@@ -34,7 +34,15 @@ int main()
     gcd = xGCD(m, n, x, y);
 
     // print the gcd, x, and y
-    cout << "GCD: " << gcd << ", x = " << x << ", y = " << y << endl;
+    if(x >= 0 && y < 0) {
+        cout << m << "*" << x << "+" << n << "*(" << y << ") = " <<  gcd;
+    } else if(x < 0 && y >= 0){
+        cout << m << "*(" << x << ")+" << n << "*" << y << " = " <<  gcd;
+    } else if (x < 0 && y < 0){
+        cout << m << "*(" << x << ")+" << n << "*(" << y << ") = " <<  gcd;
+    } else {
+        cout << m << "*" << x << "+" << n << "*" << y << " = " <<  gcd;
+    }
 
     return 0;
 }
